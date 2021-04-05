@@ -14,11 +14,25 @@ class NewWalletViewController: UIViewController {
         
         override func viewDidLoad() {
                 super.viewDidLoad()
-
-                // Do any additional setup after loading the view.
+                self.hideKeyboardWhenTappedAround()
         }
     
         @IBAction func CreateWallet(_ sender: UIButton) {
+                guard let password = self.password1.text,password != ""else {
+                        return//TODO::tips
+                }
+                if password != self.password2.text{
+                        return//TODO::tips
+                }
+                
+                do {
+                        try Wallet.shared.New(password)
+                        let sceneDelegate = UIApplication.shared.connectedScenes
+                                .first!.delegate as! SceneDelegate
+                            sceneDelegate.window!.rootViewController =  instantiateViewController(vcID: "NinjaHomeTabVC")
+                }catch let err as NSError{
+                        print("\(err)", "\(err.userInfo)")
+                }
         }
         
     /*

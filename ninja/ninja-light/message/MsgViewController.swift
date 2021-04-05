@@ -12,11 +12,10 @@ class MsgViewController: UIViewController {
         @IBOutlet weak var receiver: UITextView!
         
         override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-    
+                super.viewDidLoad()
+        
+                self.hideKeyboardWhenTappedAround()
+        }
 
     /*
     // MARK: - Navigation
@@ -27,5 +26,4 @@ class MsgViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }

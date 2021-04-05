@@ -14,21 +14,21 @@
             <objects>
                 <viewController id="z3r-xq-XGc" customClass="NewWalletViewController" customModule="ninja_light" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EZU-Le-8qK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LGY-iF-UeL">
-                                <rect key="frame" x="12" y="52" width="390" height="34"/>
+                                <rect key="frame" x="12" y="88" width="390" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password Again" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rlg-8h-idd">
-                                <rect key="frame" x="12" y="98" width="390" height="34"/>
+                                <rect key="frame" x="12" y="134" width="390" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lws-69-BrK">
-                                <rect key="frame" x="20" y="166" width="374" height="30"/>
+                                <rect key="frame" x="20" y="202" width="374" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="CreateWallet:" destination="z3r-xq-XGc" eventType="touchUpInside" id="kVl-eQ-0f7"/>
@@ -44,11 +44,12 @@
                             <constraint firstItem="rlg-8h-idd" firstAttribute="leading" secondItem="BNj-Jz-KcN" secondAttribute="leading" constant="12" id="9fk-cY-efu"/>
                             <constraint firstItem="rlg-8h-idd" firstAttribute="top" secondItem="LGY-iF-UeL" secondAttribute="bottom" constant="12" id="N9G-S1-HgY"/>
                             <constraint firstItem="lws-69-BrK" firstAttribute="top" secondItem="rlg-8h-idd" secondAttribute="bottom" constant="34" id="aTv-85-jTp"/>
-                            <constraint firstItem="LGY-iF-UeL" firstAttribute="top" secondItem="BNj-Jz-KcN" secondAttribute="top" constant="8" id="fsn-fN-1my"/>
+                            <constraint firstItem="LGY-iF-UeL" firstAttribute="top" secondItem="BNj-Jz-KcN" secondAttribute="top" constant="32" id="fsn-fN-1my"/>
                             <constraint firstItem="BNj-Jz-KcN" firstAttribute="trailing" secondItem="LGY-iF-UeL" secondAttribute="trailing" constant="12" id="pAc-Yg-xmJ"/>
                             <constraint firstItem="lws-69-BrK" firstAttribute="leading" secondItem="BNj-Jz-KcN" secondAttribute="leading" constant="20" id="vCp-ts-VId"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="8sL-bJ-vea"/>
                     <connections>
                         <outlet property="password1" destination="LGY-iF-UeL" id="QWr-It-AFS"/>
                         <outlet property="password2" destination="rlg-8h-idd" id="n8S-jU-c84"/>
@@ -56,9 +57,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lIh-JE-Cmh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-233" y="-1335"/>
+            <point key="canvasLocation" x="-233" y="-2008"/>
         </scene>
-        <!--Message-->
+        <!--Msg View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MsgViewController" customModule="ninja_light" customModuleProvider="target" sceneMemberID="viewController">
@@ -67,7 +68,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="DCO-BO-ciK">
-                                <rect key="frame" x="10" y="62" width="394" height="120"/>
+                                <rect key="frame" x="10" y="106" width="394" height="120"/>
                                 <color key="backgroundColor" red="0.42745098040000001" green="0.76078431369999999" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="qhK-Er-UuP"/>
@@ -77,14 +78,14 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="send"/>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3PT-li-hxz">
-                                <rect key="frame" x="10" y="260" width="394" height="543"/>
+                                <rect key="frame" x="10" y="304" width="394" height="499"/>
                                 <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LiM-6O-2tX">
-                                <rect key="frame" x="20" y="206" width="374" height="44"/>
+                                <rect key="frame" x="20" y="250" width="374" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="RM0-oQ-Gri"/>
                                 </constraints>
@@ -106,17 +107,18 @@
                             <constraint firstItem="DCO-BO-ciK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="clC-kk-hfn"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Message" id="5hH-pk-Hw9"/>
+                    <navigationItem key="navigationItem" id="vfJ-LT-acQ"/>
                     <connections>
                         <outlet property="receiver" destination="3PT-li-hxz" id="dNb-cq-s1P"/>
                         <outlet property="sender" destination="DCO-BO-ciK" id="OEj-2y-0gI"/>
+                        <segue destination="FX8-aW-6c9" kind="presentation" identifier="CreateNewAccountSeg" id="411-EF-eDi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="993" y="-1334"/>
+            <point key="canvasLocation" x="1903" y="-1349"/>
         </scene>
-        <!--Contact-->
+        <!--Contact View Controller-->
         <scene sceneID="9nv-Z8-xG2">
             <objects>
                 <viewController id="UIk-eo-O4w" customClass="ContactViewController" customModule="ninja_light" customModuleProvider="target" sceneMemberID="viewController">
@@ -126,13 +128,13 @@
                         <viewLayoutGuide key="safeArea" id="bRL-1I-8pt"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Contact" id="hXe-6p-t0F"/>
+                    <navigationItem key="navigationItem" id="PVV-Tz-yqZ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t3B-Pz-CKB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="993" y="-613"/>
+            <point key="canvasLocation" x="1902.8985507246377" y="-613.39285714285711"/>
         </scene>
-        <!--Wallet-->
+        <!--Wallet View Controller-->
         <scene sceneID="ups-SK-cwu">
             <objects>
                 <viewController id="p2e-wl-4Im" customClass="WalletViewController" customModule="ninja_light" customModuleProvider="target" sceneMemberID="viewController">
@@ -142,16 +144,16 @@
                         <viewLayoutGuide key="safeArea" id="pis-5W-jW5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Wallet" id="rwf-JU-YKo"/>
+                    <navigationItem key="navigationItem" id="TIN-Za-1rD"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zzd-hj-y1s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="993" y="197"/>
+            <point key="canvasLocation" x="1903" y="197"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="xsH-Cc-VaP">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="q08-v5-4FK" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="NinjaHomeTabVC" automaticallyAdjustsScrollViewInsets="NO" id="q08-v5-4FK" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ilY-AF-VSO">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -159,14 +161,89 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="Yv8-CP-7s5"/>
-                        <segue destination="UIk-eo-O4w" kind="relationship" relationship="viewControllers" id="oY0-k8-LUb"/>
-                        <segue destination="p2e-wl-4Im" kind="relationship" relationship="viewControllers" id="oOe-VQ-SOK"/>
+                        <segue destination="hMH-iT-oIX" kind="relationship" relationship="viewControllers" id="Yv8-CP-7s5"/>
+                        <segue destination="3MY-Cq-lPd" kind="relationship" relationship="viewControllers" id="oY0-k8-LUb"/>
+                        <segue destination="42j-GZ-Ir9" kind="relationship" relationship="viewControllers" id="oOe-VQ-SOK"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ULX-8x-1Y8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-233" y="-613"/>
+        </scene>
+        <!--Message-->
+        <scene sceneID="zXh-oJ-LWU">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hMH-iT-oIX" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Message" id="5hH-pk-Hw9"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NPe-PD-yS8">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="KjT-qw-rZR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rv4-td-qdD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="677" y="-1349"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="F4Y-Bi-3Uf">
+            <objects>
+                <navigationController storyboardIdentifier="NinjaNewWalletVC" automaticallyAdjustsScrollViewInsets="NO" id="FX8-aW-6c9" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="VyG-dY-8Vo">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="z3r-xq-XGc" kind="relationship" relationship="rootViewController" id="u6b-c6-1XF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J4H-yq-SJZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-233" y="-1311"/>
+        </scene>
+        <!--Contact-->
+        <scene sceneID="5hS-YP-7qe">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3MY-Cq-lPd" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Contact" id="hXe-6p-t0F"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6tS-X7-f1Y">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="UIk-eo-O4w" kind="relationship" relationship="rootViewController" id="cfG-pA-itw"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QPa-ey-PI5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="677" y="-613"/>
+        </scene>
+        <!--Wallet-->
+        <scene sceneID="Y8B-uS-dJh">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="42j-GZ-Ir9" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Wallet" id="rwf-JU-YKo"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="svg-Mk-Tzh">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="p2e-wl-4Im" kind="relationship" relationship="rootViewController" id="yaC-lJ-v51"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b5r-Da-i15" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="677" y="197"/>
         </scene>
     </scenes>
     <resources>

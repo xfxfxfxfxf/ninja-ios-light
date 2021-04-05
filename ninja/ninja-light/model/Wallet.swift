@@ -9,8 +9,17 @@ import Foundation
 import CoreData
 
 class Wallet:NSObject{
-        override init() {
+        var obj:CDWallet?
+        public static let shared = Wallet()
+        private override init() {
                 super.init()
+        }
+        func valid() -> Bool {
+                return obj != nil
+        }
+        
+        func New(_ password:String) throws {
+                
         }
 }
 extension Wallet:ModelObj{
