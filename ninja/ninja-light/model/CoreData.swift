@@ -1,0 +1,164 @@
+//
+//  CoreData.swift
+//  ninja-light
+//
+//  Created by wesley on 2021/4/5.
+//
+
+import Foundation
+import CoreData
+
+protocol ModelObj:NSObject {
+        func fullFillObj(obj:NSManagedObject)
+        func initByObj(obj:NSManagedObject)
+}
+
+class CDManager:NSObject{
+        
+        public static let shared = CDManager()
+        private override init(){
+                super.init()
+        }
+        // MARK: - Core Data stack
+
+        lazy var persistentContainer: NSPersistentContainer = {
+            /*
+             The persistent container for the application. This implementation
+             creates and returns a container, having loaded the store for the
+             application to it. This property is optional since there are legitimate
+             error conditions that could cause the creation of the store to fail.
+            */
+            let container = NSPersistentContainer(name: "ninja")
+            container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+                if let error = error as NSError? {
+                    // Replace this implementation with code to handle the error appropriately.
+                    // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                     
+                    /*
+                     Typical reasons for an error here include:
+                     * The parent directory does not exist, cannot be created, or disallows writing.
+                     * The persistent store is not accessible, due to permissions or data protection when the device is locked.
+                     * The device is out of space.
+                     * The store could not be migrated to the current model version.
+                     Check the error message to determine what the actual problem was.
+                     */
+                    fatalError("Unresolved error \(error), \(error.userInfo)")
+                }
+            })
+            return container
+        }()
+
+        // MARK: - Core Data Saving support
+
+        func saveContext () {
+            let context = persistentContainer.viewContext
+            if context.hasChanges {
+                do {
+                    try context.save()
+                } catch {
+                    let nserror = error as NSError
+                        print("Unresolved error \(nserror), \(nserror.userInfo)")
+                }
+            }
+        }
+}
+
+extension CDManager{
+        
+        func Get<T>(entity:String, predicate:String?,
+                    sort:[[String:Bool]]?, limit:Int?) ->[T] where T: ModelObj{
+                let managedContext = persistentContainer.viewContext
+                let fetchRequest =  NSFetchRequest<NSManagedObject>(entityName: entity)
+                
+                if let myPredicate = predicate {
+                        fetchRequest.predicate = NSPredicate(format: myPredicate)
+                }
+                
+                if let mySort = sort {
+                        var sortArr :[NSSortDescriptor] = []
+                        for sortCond in mySort {
+                           for (k, v) in sortCond {
+                               sortArr.append(
+                                 NSSortDescriptor(
+                                   key: k, ascending: v))
+                           }
+                        }
+
+                        fetchRequest.sortDescriptors = sortArr
+                }
+
+                if let limitNumber = limit {
+                        fetchRequest.fetchLimit = limitNumber
+                }
+                
+                var result:[T] = []
+                do {
+                        let objArr = try managedContext.fetch(fetchRequest)
+                        for obj in objArr {
+                                let t = T.init()
+                                t.initByObj(obj:obj)
+                                result.append(t)
+                        }
+                } catch let error as NSError {
+                          print("Could not save. \(error), \(error.userInfo)")
+                }
+                return result
+        }
+        
+        func GetOne<T>(entity:String, predicate:String?) -> T?  where T: ModelObj{
+                var result:[T] = []
+                result = self.Get(entity: entity, predicate: predicate, sort: nil, limit: 1)
+                if result.count == 0{
+                        return nil
+                }
+                return result.first
+        }
+        
+        func Save<T>(entity:String, m:T) where T: ModelObj{
+                let managedContext = persistentContainer.viewContext
+                  
+                 
+                let entity = NSEntityDescription.entity(forEntityName: entity,
+                                               in: managedContext)!
+                  
+                let object = NSManagedObject(entity: entity,
+                                             insertInto: managedContext)
+               
+                m.fullFillObj(obj: object)
+                 
+                  do {
+                    try managedContext.save()
+                  } catch let error as NSError {
+                    print("Could not save. \(error), \(error.userInfo)")
+                  }
+        }
+        
+        func Delete(entity:String, predicate:String?){
+                let managedContext = persistentContainer.viewContext
+                let fetchRequest =  NSFetchRequest<NSManagedObject>(entityName: entity)
+                
+                if let myPredicate = predicate {
+                        fetchRequest.predicate = NSPredicate(format: myPredicate)
+                }
+                do {
+                        let objArr = try managedContext.fetch(fetchRequest)
+                        for obj in objArr {
+                                managedContext.delete(obj)
+                        }
+                        try managedContext.save()
+                } catch let error as NSError{
+                        print("Could not save. \(error), \(error.userInfo)")
+                }
+        }
+        
+        func DeleteObj(obj:NSManagedObject){
+                
+                let managedContext = persistentContainer.viewContext
+                managedContext.delete(obj)
+                do {
+                        try managedContext.save()
+                } catch let error as NSError{
+                        print("Could not save. \(error), \(error.userInfo)")
+                }
+        }
+}

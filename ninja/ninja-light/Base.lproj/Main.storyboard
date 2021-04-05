@@ -9,6 +9,55 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--New Wallet View Controller-->
+        <scene sceneID="p9e-k8-P6l">
+            <objects>
+                <viewController id="z3r-xq-XGc" customClass="NewWalletViewController" customModule="ninja_light" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EZU-Le-8qK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LGY-iF-UeL">
+                                <rect key="frame" x="12" y="52" width="390" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password Again" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rlg-8h-idd">
+                                <rect key="frame" x="12" y="98" width="390" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lws-69-BrK">
+                                <rect key="frame" x="20" y="166" width="374" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="CreateWallet:" destination="z3r-xq-XGc" eventType="touchUpInside" id="kVl-eQ-0f7"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="BNj-Jz-KcN"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="BNj-Jz-KcN" firstAttribute="trailing" secondItem="lws-69-BrK" secondAttribute="trailing" constant="20" id="5MU-9I-pqb"/>
+                            <constraint firstItem="BNj-Jz-KcN" firstAttribute="trailing" secondItem="rlg-8h-idd" secondAttribute="trailing" constant="12" id="5jS-lo-Ek9"/>
+                            <constraint firstItem="LGY-iF-UeL" firstAttribute="leading" secondItem="BNj-Jz-KcN" secondAttribute="leading" constant="12" id="9Jf-lP-AmK"/>
+                            <constraint firstItem="rlg-8h-idd" firstAttribute="leading" secondItem="BNj-Jz-KcN" secondAttribute="leading" constant="12" id="9fk-cY-efu"/>
+                            <constraint firstItem="rlg-8h-idd" firstAttribute="top" secondItem="LGY-iF-UeL" secondAttribute="bottom" constant="12" id="N9G-S1-HgY"/>
+                            <constraint firstItem="lws-69-BrK" firstAttribute="top" secondItem="rlg-8h-idd" secondAttribute="bottom" constant="34" id="aTv-85-jTp"/>
+                            <constraint firstItem="LGY-iF-UeL" firstAttribute="top" secondItem="BNj-Jz-KcN" secondAttribute="top" constant="8" id="fsn-fN-1my"/>
+                            <constraint firstItem="BNj-Jz-KcN" firstAttribute="trailing" secondItem="LGY-iF-UeL" secondAttribute="trailing" constant="12" id="pAc-Yg-xmJ"/>
+                            <constraint firstItem="lws-69-BrK" firstAttribute="leading" secondItem="BNj-Jz-KcN" secondAttribute="leading" constant="20" id="vCp-ts-VId"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="password1" destination="LGY-iF-UeL" id="QWr-It-AFS"/>
+                        <outlet property="password2" destination="rlg-8h-idd" id="n8S-jU-c84"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lIh-JE-Cmh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-233" y="-1335"/>
+        </scene>
         <!--Message-->
         <scene sceneID="tne-QT-ifu">
             <objects>
