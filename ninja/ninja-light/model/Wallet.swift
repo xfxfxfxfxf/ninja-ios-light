@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import IosLib
 
 class Wallet:NSObject{
         var obj:CDWallet?

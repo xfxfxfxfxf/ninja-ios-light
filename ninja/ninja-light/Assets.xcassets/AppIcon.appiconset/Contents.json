@@ -6,6 +6,7 @@
       "size" : "20x20"
     },
     {
+      "filename" : "忍者-5.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "20x20"
@@ -16,6 +17,7 @@
       "size" : "29x29"
     },
     {
+      "filename" : "忍者-4.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "29x29"
@@ -26,16 +28,19 @@
       "size" : "40x40"
     },
     {
+      "filename" : "忍者-6.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "40x40"
     },
     {
+      "filename" : "忍者-9.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "60x60"
     },
     {
+      "filename" : "忍者-3.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "60x60"
@@ -46,6 +51,7 @@
       "size" : "20x20"
     },
     {
+      "filename" : "忍者-7.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "20x20"
@@ -56,6 +62,7 @@
       "size" : "29x29"
     },
     {
+      "filename" : "忍者-2.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "29x29"
@@ -66,6 +73,7 @@
       "size" : "40x40"
     },
     {
+      "filename" : "忍者-8.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "40x40"
@@ -76,16 +84,19 @@
       "size" : "76x76"
     },
     {
+      "filename" : "忍者-1.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "76x76"
     },
     {
+      "filename" : "忍者.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "83.5x83.5"
     },
     {
+      "filename" : "忍者@2x.png",
       "idiom" : "ios-marketing",
       "scale" : "1x",
       "size" : "1024x1024"
