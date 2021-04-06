@@ -9,8 +9,8 @@ import Foundation
 import CoreData
 
 protocol ModelObj:NSObject {
-        func fullFillObj(obj:NSManagedObject)
-        func initByObj(obj:NSManagedObject)
+        func fullFillObj(obj:NSManagedObject) throws
+        func initByObj(obj:NSManagedObject) throws
 }
 
 class CDManager:NSObject{
@@ -66,7 +66,7 @@ class CDManager:NSObject{
 extension CDManager{
         
         func Get<T>(entity:String, predicate:String?,
-                    sort:[[String:Bool]]?, limit:Int?) ->[T] where T: ModelObj{
+                    sort:[[String:Bool]]?, limit:Int?)throws ->[T] where T: ModelObj{
                 let managedContext = persistentContainer.viewContext
                 let fetchRequest =  NSFetchRequest<NSManagedObject>(entityName: entity)
                 
@@ -92,29 +92,25 @@ extension CDManager{
                 }
                 
                 var result:[T] = []
-                do {
                         let objArr = try managedContext.fetch(fetchRequest)
                         for obj in objArr {
                                 let t = T.init()
-                                t.initByObj(obj:obj)
+                                try t.initByObj(obj:obj)
                                 result.append(t)
                         }
-                } catch let error as NSError {
-                          print("Could not save. \(error), \(error.userInfo)")
-                }
                 return result
         }
         
-        func GetOne<T>(entity:String, predicate:String?) -> T?  where T: ModelObj{
+        func GetOne<T>(entity:String, predicate:String?)throws -> T?  where T: ModelObj{
                 var result:[T] = []
-                result = self.Get(entity: entity, predicate: predicate, sort: nil, limit: 1)
+                result = try self.Get(entity: entity, predicate: predicate, sort: nil, limit: 1)
                 if result.count == 0{
                         return nil
                 }
                 return result.first
         }
         
-        func Save<T>(entity:String, m:T) where T: ModelObj{
+        func Save<T>(entity:String, m:T)throws where T: ModelObj{
                 let managedContext = persistentContainer.viewContext
                   
                  
@@ -124,13 +120,9 @@ extension CDManager{
                 let object = NSManagedObject(entity: entity,
                                              insertInto: managedContext)
                
-                m.fullFillObj(obj: object)
-                 
-                  do {
-                    try managedContext.save()
-                  } catch let error as NSError {
-                    print("Could not save. \(error), \(error.userInfo)")
-                  }
+                try m.fullFillObj(obj: object)
+                
+                try managedContext.save()
         }
         
         func Delete(entity:String, predicate:String?){

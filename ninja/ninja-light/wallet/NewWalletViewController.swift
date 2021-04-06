@@ -19,19 +19,20 @@ class NewWalletViewController: UIViewController {
     
         @IBAction func CreateWallet(_ sender: UIButton) {
                 guard let password = self.password1.text,password != ""else {
-                        return//TODO::tips
+                        self.toastMessage(title: "Password can't be empty")
+                        return
                 }
                 if password != self.password2.text{
-                        return//TODO::tips
+                        self.toastMessage(title: "2 passwords are not same")
+                        return
                 }
                 
                 do {
                         try Wallet.shared.New(password)
-                        let sceneDelegate = UIApplication.shared.connectedScenes
-                                .first!.delegate as! SceneDelegate
-                            sceneDelegate.window!.rootViewController =  instantiateViewController(vcID: "NinjaHomeTabVC")
+                        let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as! SceneDelegate
+                        sceneDelegate.window!.rootViewController =  instantiateViewController(vcID: "NinjaHomeTabVC")
                 }catch let err as NSError{
-                        print("\(err)", "\(err.userInfo)")
+                        self.toastMessage(title: err.localizedDescription)
                 }
         }
         

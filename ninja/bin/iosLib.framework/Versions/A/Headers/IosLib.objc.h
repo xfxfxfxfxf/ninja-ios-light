@@ -21,6 +21,8 @@
 - (nonnull instancetype)init;
 @end
 
+FOUNDATION_EXPORT NSString* _Nonnull IosLibActiveAddress(void);
+
 FOUNDATION_EXPORT BOOL IosLibInitApp(NSString* _Nullable cipherTxt, NSString* _Nullable auth, NSError* _Nullable* _Nullable error);
 
 FOUNDATION_EXPORT NSString* _Nonnull IosLibNewWallet(NSString* _Nullable auth);

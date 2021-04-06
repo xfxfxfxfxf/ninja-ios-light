@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 guard let winScene = (scene as? UIWindowScene) else { return }
                 
                 window = UIWindow(windowScene: winScene)
-                if Wallet.shared.valid(){
+                if Wallet.shared.hasWallet{
                         window?.rootViewController = instantiateViewController(vcID: "NinjaHomeTabVC")
                 }else{
                         window?.rootViewController = instantiateViewController(vcID: "NinjaNewWalletVC")
@@ -35,8 +35,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
 
         func sceneDidBecomeActive(_ scene: UIScene) {
-                if !Wallet.shared.valid(){
-                }
                 // Called when the scene has moved from an inactive state to an active state.
                 // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
         }
