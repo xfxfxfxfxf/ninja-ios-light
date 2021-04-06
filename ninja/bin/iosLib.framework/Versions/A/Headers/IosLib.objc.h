@@ -12,8 +12,13 @@
 
 
 @class IosLibIosApp;
+@protocol IosLibAppCallBack;
+@class IosLibAppCallBack;
 
-@interface IosLibIosApp : NSObject <goSeqRefInterface> {
+@protocol IosLibAppCallBack <NSObject>
+@end
+
+@interface IosLibIosApp : NSObject <goSeqRefInterface, IosLibAppCallBack> {
 }
 @property(strong, readonly) _Nonnull id _ref;
 
@@ -23,8 +28,19 @@
 
 FOUNDATION_EXPORT NSString* _Nonnull IosLibActiveAddress(void);
 
-FOUNDATION_EXPORT BOOL IosLibInitApp(NSString* _Nullable cipherTxt, NSString* _Nullable auth, NSError* _Nullable* _Nullable error);
+FOUNDATION_EXPORT BOOL IosLibInitApp(NSString* _Nullable cipherTxt, NSString* _Nullable auth, id<IosLibAppCallBack> _Nullable callback, NSError* _Nullable* _Nullable error);
 
 FOUNDATION_EXPORT NSString* _Nonnull IosLibNewWallet(NSString* _Nullable auth);
+
+FOUNDATION_EXPORT void IosLibWriteMessage(NSString* _Nullable To, NSData* _Nullable payload);
+
+@class IosLibAppCallBack;
+
+@interface IosLibAppCallBack : NSObject <goSeqRefInterface, IosLibAppCallBack> {
+}
+@property(strong, readonly) _Nonnull id _ref;
+
+- (nonnull instancetype)initWithRef:(_Nonnull id)ref;
+@end
 
 #endif

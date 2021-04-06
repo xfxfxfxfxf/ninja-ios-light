@@ -13,7 +13,6 @@ class MsgViewController: UIViewController {
         
         override func viewDidLoad() {
                 super.viewDidLoad()
-        
                 self.hideKeyboardWhenTappedAround()
         }
 
