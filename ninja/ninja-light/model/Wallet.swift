@@ -20,7 +20,8 @@ class Wallet:NSObject{
         }
         
         func New(_ password:String) throws {
-                
+               let result =  IosLib.IosLibNewWallet(password)
+                NSLog("\(result)")
         }
 }
 extension Wallet:ModelObj{
