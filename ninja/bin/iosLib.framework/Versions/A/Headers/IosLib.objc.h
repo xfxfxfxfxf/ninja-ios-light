@@ -16,9 +16,12 @@
 @class IosLibAppCallBack;
 
 @protocol IosLibAppCallBack <NSObject>
+- (BOOL)immediateMessage:(NSString* _Nullable)from to:(NSString* _Nullable)to payload:(NSData* _Nullable)payload time:(int64_t)time error:(NSError* _Nullable* _Nullable)error;
+- (BOOL)unreadMsg:(NSData* _Nullable)jsonData error:(NSError* _Nullable* _Nullable)error;
+- (void)webSocketClosed;
 @end
 
-@interface IosLibIosApp : NSObject <goSeqRefInterface, IosLibAppCallBack> {
+@interface IosLibIosApp : NSObject <goSeqRefInterface> {
 }
 @property(strong, readonly) _Nonnull id _ref;
 
@@ -41,6 +44,9 @@ FOUNDATION_EXPORT void IosLibWriteMessage(NSString* _Nullable To, NSData* _Nulla
 @property(strong, readonly) _Nonnull id _ref;
 
 - (nonnull instancetype)initWithRef:(_Nonnull id)ref;
+- (BOOL)immediateMessage:(NSString* _Nullable)from to:(NSString* _Nullable)to payload:(NSData* _Nullable)payload time:(int64_t)time error:(NSError* _Nullable* _Nullable)error;
+- (BOOL)unreadMsg:(NSData* _Nullable)jsonData error:(NSError* _Nullable* _Nullable)error;
+- (void)webSocketClosed;
 @end
 
 #endif
