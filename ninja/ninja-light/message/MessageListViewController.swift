@@ -23,19 +23,17 @@ class MessageListViewController: UIViewController {
         }
         //MARK: - object c
         @objc func reloadChatRoom(_ sender: Any?){
-                guard Wallet.shared.IsActive() else{
+                if !Wallet.shared.IsActive(){
                         self.online()
-                        self.reloadChatRoom(nil)
-                        return
                 }
                 
-                ServiceDelegate.workQueue.async {
-                        ChatItem.ReloadChatRoom()
-                        DispatchQueue.main.async {
-                                self.refreshControl.endRefreshing()
-                                self.tableView.reloadData()
-                        }
-                }
+//                ServiceDelegate.workQueue.async {
+//                        ChatItem.ReloadChatRoom()
+//                        DispatchQueue.main.async {
+//                                self.refreshControl.endRefreshing()
+//                                self.tableView.reloadData()
+//                        }
+//                }
         }
         
         override func viewWillAppear(_ animated: Bool) {
@@ -60,6 +58,7 @@ class MessageListViewController: UIViewController {
                         
                         defer{
                                 self.hideIndicator()
+                                self.refreshControl.endRefreshing()
                         }
                         guard let pwd = password, isOK else{
                                 self.tableTopConstraint.constant = 30

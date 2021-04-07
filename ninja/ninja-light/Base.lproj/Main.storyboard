@@ -155,9 +155,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="6bS-lR-cZO"/>
                     <connections>
-                        <outlet property="ChatTabelView" destination="QIE-8R-ael" id="3Cp-sg-uaP"/>
                         <outlet property="errorTips" destination="ekD-93-osk" id="7Et-Ez-pno"/>
                         <outlet property="tableTopConstraint" destination="Pbp-08-Jdp" id="wlN-GP-Pfw"/>
+                        <outlet property="tableView" destination="QIE-8R-ael" id="qMK-Je-5SC"/>
                         <segue destination="z3r-xq-XGc" kind="presentation" identifier="CreateNewAccountSeg" id="I7X-dG-gCK"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="ShowMessageDetailsSEG" id="V9e-Ft-IOj"/>
                     </connections>
