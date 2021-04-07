@@ -24,6 +24,10 @@ class WebsocketSrv:NSObject{
                 IosLib.IosLibWSOnline(&err)
                 return err
         }
+        
+        func Offline() {
+                IosLib.IosLibWSOffline()
+        }
 }
 
 extension WebsocketSrv:IosLibAppCallBackProtocol{

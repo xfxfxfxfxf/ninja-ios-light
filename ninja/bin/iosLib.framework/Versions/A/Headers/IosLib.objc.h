@@ -42,6 +42,8 @@ FOUNDATION_EXPORT NSString* _Nonnull IosLibNewWallet(NSString* _Nullable auth);
 
 FOUNDATION_EXPORT BOOL IosLibWSIsOnline(void);
 
+FOUNDATION_EXPORT void IosLibWSOffline(void);
+
 FOUNDATION_EXPORT BOOL IosLibWSOnline(NSError* _Nullable* _Nullable error);
 
 FOUNDATION_EXPORT BOOL IosLibWalletIsOpen(void);

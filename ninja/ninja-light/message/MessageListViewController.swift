@@ -57,7 +57,6 @@ class MessageListViewController: UIViewController {
                         showErrorTips(err: err)
                         return
                 }
-                
         }
         private func showErrorTips(err:Error){
                 DispatchQueue.main.async{
