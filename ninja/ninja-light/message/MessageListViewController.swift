@@ -38,6 +38,7 @@ class MessageListViewController: UIViewController {
         
         override func viewWillAppear(_ animated: Bool) {
                 super.viewWillAppear(animated)
+                self.hideErrorTips()
                 
                 guard Wallet.shared.loaded else{
                         self.performSegue(withIdentifier: "CreateNewAccountSeg", sender: self)
@@ -53,7 +54,7 @@ class MessageListViewController: UIViewController {
                         guard let err = WebsocketSrv.shared.Online() else{
                                 return
                         }
-                        
+                        NSLog("\(err.localizedDescription)")
                         showErrorTips(err: err)
                         return
                 }
@@ -63,6 +64,13 @@ class MessageListViewController: UIViewController {
                         self.tableTopConstraint.constant = 30
                         self.errorTips.isHidden = false
                         self.errorTips.text = err.localizedDescription
+                }
+        }
+        private func hideErrorTips(){
+                DispatchQueue.main.async{
+                        self.tableTopConstraint.constant = 0
+                        self.errorTips.isHidden = true
+                        self.errorTips.text = ""
                 }
         }
         
@@ -83,8 +91,7 @@ class MessageListViewController: UIViewController {
                                 return
                         }
                         guard let err = ServiceDelegate.InitService(pwd) else{
-                                self.tableTopConstraint.constant = 0
-                                self.errorTips.isHidden = true
+                                self.hideErrorTips()
                                 return
                         }
                         self.showErrorTips(err: err)

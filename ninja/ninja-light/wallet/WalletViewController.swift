@@ -10,6 +10,7 @@ import UIKit
 class WalletViewController: UIViewController {
 
         
+        @IBOutlet weak var nickName: UILabel!
         @IBOutlet weak var avatarImg: UIImageView!
         @IBOutlet weak var address: UILabel!
         
@@ -30,7 +31,8 @@ class WalletViewController: UIViewController {
                 self.toastMessage(title: "Copy Success")
         }
         
-        
+        @IBAction func ChangeNickName(_ sender: UIButton) {
+        }
         
     /*
     // MARK: - Navigation

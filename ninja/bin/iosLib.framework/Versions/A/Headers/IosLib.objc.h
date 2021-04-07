@@ -38,6 +38,8 @@ FOUNDATION_EXPORT NSString* _Nonnull IosLibActiveAddress(void);
 
 FOUNDATION_EXPORT BOOL IosLibInitApp(NSString* _Nullable cipherTxt, NSString* _Nullable auth, NSString* _Nullable addr, id<IosLibAppCallBack> _Nullable callback, NSError* _Nullable* _Nullable error);
 
+FOUNDATION_EXPORT BOOL IosLibIsValidNinjaAddr(NSString* _Nullable addr);
+
 FOUNDATION_EXPORT NSString* _Nonnull IosLibNewWallet(NSString* _Nullable auth);
 
 FOUNDATION_EXPORT BOOL IosLibWSIsOnline(void);

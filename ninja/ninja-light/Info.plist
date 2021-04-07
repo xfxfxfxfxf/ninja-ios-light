@@ -66,5 +66,11 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Scan wallet QR code image</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Export wallet QR code image</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Import wallet QR code image</string>
 </dict>
 </plist>

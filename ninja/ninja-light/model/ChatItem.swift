@@ -14,24 +14,15 @@ class ChatItem:NSObject{
         
         var obj:CDChatItem?
         lazy var ItemID:String? = {
-                if self.obj == nil{
-                        return nil
-                }
-                return self.obj!.uid
+                return self.obj?.uid
         }()
         
         lazy var ImageData:Data? = {
-                if self.obj == nil{
-                        return nil
-                }
-                return self.obj!.image
+                return self.obj?.image
         }()
         
         lazy var NickName:String? = {
-                if self.obj == nil{
-                        return nil
-                }
-                return self.obj!.nickName
+                return self.obj?.nickName
         }()
         
         var LastMsg:String?
