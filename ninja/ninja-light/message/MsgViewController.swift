@@ -15,11 +15,6 @@ class MsgViewController: UIViewController {
                 super.viewDidLoad()
                 self.hideKeyboardWhenTappedAround()
         }
-        
-        override func viewWillAppear(_ animated: Bool) {
-                super.viewWillAppear(animated)
-                ServiceDelegate.InitService()
-        }
 
     /*
     // MARK: - Navigation

@@ -20,7 +20,7 @@ class Wallet:NSObject{
                 super.init()
         }
         
-        lazy var hasWallet: Bool = {
+        lazy var loaded: Bool = {
                 do {
                         var inst:Wallet?
                         inst = try CDManager.shared.GetOne(entity: "CDWallet", predicate: nil)
@@ -56,6 +56,9 @@ class Wallet:NSObject{
                 self.Addr = addr
                 self.wJson = walletJson
                 try CDManager.shared.Save(entity: "CDWallet", m: self)
+        }
+        func IsActive()->Bool{
+                return IosLib.IosLibWalletIsOpen()
         }
 }
 

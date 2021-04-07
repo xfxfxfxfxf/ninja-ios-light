@@ -82,6 +82,20 @@ extension UIViewController {
                         self.present(ac, animated: true)
                 }
         }
+        
+        func LoadAlertFromStoryBoard(payload:AlertPayload){ DispatchQueue.main.async {
+                
+                guard let alertVC = instantiateViewController(vcID: "PasswordViewControllerID")
+                            as? PasswordViewController else{
+                            return
+                        }
+                        
+                        alertVC.payload = payload;
+                        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert);
+                        alertController.setValue(alertVC, forKey: "contentViewController");
+                        self.present(alertController, animated: true, completion: nil);
+                }
+        }
 }
 
 extension MBProgressHUD{

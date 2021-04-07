@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 guard let winScene = (scene as? UIWindowScene) else { return }
                 
                 window = UIWindow(windowScene: winScene)
-                if Wallet.shared.hasWallet{
+                if Wallet.shared.loaded{
                         window?.rootViewController = instantiateViewController(vcID: "NinjaHomeTabVC")
                 }else{
                         window?.rootViewController = instantiateViewController(vcID: "NinjaNewWalletVC")

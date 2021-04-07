@@ -35,6 +35,8 @@ FOUNDATION_EXPORT BOOL IosLibInitApp(NSString* _Nullable cipherTxt, NSString* _N
 
 FOUNDATION_EXPORT NSString* _Nonnull IosLibNewWallet(NSString* _Nullable auth);
 
+FOUNDATION_EXPORT BOOL IosLibWalletIsOpen(void);
+
 FOUNDATION_EXPORT void IosLibWriteMessage(NSString* _Nullable To, NSData* _Nullable payload);
 
 @class IosLibAppCallBack;
