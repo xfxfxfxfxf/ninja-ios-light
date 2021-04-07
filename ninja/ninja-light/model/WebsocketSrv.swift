@@ -9,9 +9,20 @@ import Foundation
 import IosLib
 
 class WebsocketSrv:NSObject{
-       public static var shared = WebsocketSrv()
+        public static var shared = WebsocketSrv()
         override init() {
                 super.init()
+        }
+        
+        func IsOnline() -> Bool {
+                
+                return IosLib.IosLibWSIsOnline()
+        }
+        
+        func Online()->Error?{
+                var err:NSError? = nil
+                IosLib.IosLibWSOnline(&err)
+                return err
         }
 }
 

@@ -18,7 +18,8 @@ class ServiceDelegate: NSObject {
         public static func InitService(_ password:String)->Error?{
                 var error:NSError? = nil
                 let wallet = Wallet.shared
-                IosLib.IosLibInitApp(wallet.wJson, password, WebsocketSrv.shared, &error)
+                //TODO:: boot node list showed on wallet tabview
+                IosLib.IosLibInitApp(wallet.wJson, password, "", WebsocketSrv.shared, &error)
                 return error
         }
 }

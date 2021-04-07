@@ -10,7 +10,7 @@ import UIKit
 class MsgViewController: UIViewController {
         @IBOutlet weak var sender: UITextView!
         @IBOutlet weak var receiver: UITextView!
-        
+        var chatID:String?
         override func viewDidLoad() {
                 super.viewDidLoad()
                 self.hideKeyboardWhenTappedAround()

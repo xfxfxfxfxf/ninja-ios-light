@@ -27,17 +27,26 @@
 
 - (nonnull instancetype)initWithRef:(_Nonnull id)ref;
 - (nonnull instancetype)init;
+// skipped method IosApp.ImmediateMessage with unsupported parameter or return types
+
+// skipped method IosApp.UnreadMsg with unsupported parameter or return types
+
+- (void)webSocketClosed;
 @end
 
 FOUNDATION_EXPORT NSString* _Nonnull IosLibActiveAddress(void);
 
-FOUNDATION_EXPORT BOOL IosLibInitApp(NSString* _Nullable cipherTxt, NSString* _Nullable auth, id<IosLibAppCallBack> _Nullable callback, NSError* _Nullable* _Nullable error);
+FOUNDATION_EXPORT BOOL IosLibInitApp(NSString* _Nullable cipherTxt, NSString* _Nullable auth, NSString* _Nullable addr, id<IosLibAppCallBack> _Nullable callback, NSError* _Nullable* _Nullable error);
 
 FOUNDATION_EXPORT NSString* _Nonnull IosLibNewWallet(NSString* _Nullable auth);
 
+FOUNDATION_EXPORT BOOL IosLibWSIsOnline(void);
+
+FOUNDATION_EXPORT BOOL IosLibWSOnline(NSError* _Nullable* _Nullable error);
+
 FOUNDATION_EXPORT BOOL IosLibWalletIsOpen(void);
 
-FOUNDATION_EXPORT void IosLibWriteMessage(NSString* _Nullable To, NSData* _Nullable payload);
+FOUNDATION_EXPORT BOOL IosLibWriteMessage(NSString* _Nullable to, NSData* _Nullable payload, NSError* _Nullable* _Nullable error);
 
 @class IosLibAppCallBack;
 

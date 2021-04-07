@@ -13,6 +13,13 @@ class ChatItem:NSObject{
         public static var CachedChats:[ChatItem] = []
         
         var obj:CDChatItem?
+        lazy var ItemID:String? = {
+                if self.obj == nil{
+                        return nil
+                }
+                return self.obj!.uid
+        }()
+        
         lazy var ImageData:Data? = {
                 if self.obj == nil{
                         return nil

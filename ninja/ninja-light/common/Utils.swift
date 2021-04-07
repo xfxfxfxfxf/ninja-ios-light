@@ -96,6 +96,43 @@ extension UIViewController {
                         self.present(alertController, animated: true, completion: nil);
                 }
         }
+        
+        func ShowQRAlertView(image:UIImage?){
+                guard let alertVC = instantiateViewController(vcID: "QRCodeShowViewControllerSID")
+                    as? QRCodeShowViewController else{
+                    return
+                }
+                alertVC.QRImage = image;
+                let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert);
+                alertController.setValue(alertVC, forKey: "contentViewController");
+                self.present(alertController, animated: true, completion: nil);
+        }
+        
+        func ShowQRAlertView(data:String){
+                guard let image = generateQRCode(from: data) else { return }
+                self.ShowQRAlertView(image: image)
+        }
+        
+        func generateQRCode(from message: String) -> UIImage? {
+                
+                guard let data = message.data(using: .utf8) else{
+                        return nil
+                }
+                
+                guard let qr = CIFilter(name: "CIQRCodeGenerator",
+                                        parameters: ["inputMessage":
+                                                data, "inputCorrectionLevel":"M"]) else{
+                        return nil
+                }
+                
+                guard let qrImage = qr.outputImage?.transformed(by: CGAffineTransform(scaleX: 5, y: 5)) else{
+                        return nil
+                }
+                let context = CIContext()
+                let cgImage = context.createCGImage(qrImage, from: qrImage.extent)
+                let uiImage = UIImage(cgImage: cgImage!)
+                return uiImage
+        }
 }
 
 extension MBProgressHUD{

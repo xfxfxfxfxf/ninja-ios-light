@@ -9,13 +9,29 @@ import UIKit
 
 class WalletViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
+        
+        @IBOutlet weak var avatarImg: UIImageView!
+        @IBOutlet weak var address: UILabel!
+        
+        override func viewDidLoad() {
+                super.viewDidLoad()
+                address.text = Wallet.shared.Addr
+        }
     
-
+        @IBAction func QRCodeShow(_ sender: Any) {
+                guard let addr = self.address.text else {
+                        return
+                }
+                self.ShowQRAlertView(data: addr)
+        }
+        
+        @IBAction func Copy(_ sender: UIButton) {
+                UIPasteboard.general.string = Wallet.shared.Addr
+                self.toastMessage(title: "Copy Success")
+        }
+        
+        
+        
     /*
     // MARK: - Navigation
 
@@ -25,5 +41,4 @@ class WalletViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }

@@ -12,7 +12,7 @@ class MessageListViewController: UIViewController {
         @IBOutlet weak var tableTopConstraint: NSLayoutConstraint!
         @IBOutlet weak var tableView: UITableView!
         
-        
+        var SelectedRowID:Int? = nil
         var refreshControl = UIRefreshControl()
         override func viewDidLoad() {
                 super.viewDidLoad()
@@ -24,7 +24,7 @@ class MessageListViewController: UIViewController {
         //MARK: - object c
         @objc func reloadChatRoom(_ sender: Any?){
                 if !Wallet.shared.IsActive(){
-                        self.online()
+                        self.activeAccount()
                 }
                 
 //                ServiceDelegate.workQueue.async {
@@ -45,12 +45,29 @@ class MessageListViewController: UIViewController {
                 }
                 
                 guard Wallet.shared.IsActive() else{
-                        self.online()
+                        self.activeAccount()
                         return
+                }
+                
+                guard WebsocketSrv.shared.IsOnline() else {
+                        guard let err = WebsocketSrv.shared.Online() else{
+                                return
+                        }
+                        
+                        showErrorTips(err: err)
+                        return
+                }
+                
+        }
+        private func showErrorTips(err:Error){
+                DispatchQueue.main.async{
+                        self.tableTopConstraint.constant = 30
+                        self.errorTips.isHidden = false
+                        self.errorTips.text = err.localizedDescription
                 }
         }
         
-        private func online(){
+        private func activeAccount(){
                 self.showIndicator(withTitle:"Wallet",  and: "Opening")
                 
                 let ap = AlertPayload(title: "Unlock", placeholderTxt: "Password"){
@@ -71,27 +88,31 @@ class MessageListViewController: UIViewController {
                                 self.errorTips.isHidden = true
                                 return
                         }
-                        
-                        DispatchQueue.main.async{
-                                self.tableTopConstraint.constant = 30
-                                self.errorTips.isHidden = false
-                                self.errorTips.text = err.localizedDescription
-                        }
+                        self.showErrorTips(err: err)
                 }
                 
                 LoadAlertFromStoryBoard(payload: ap)
         }
 
-    /*
+    
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+                if segue.identifier == "ShowMessageDetailsSEG"{
+                        guard let idx = self.SelectedRowID else{
+                                return
+                        }
+                        guard let vc = segue.destination as? MsgViewController else{
+                                return
+                        }
+                        
+                        let item = ChatItem.CachedChats[idx]
+                        vc.chatID = item.ItemID
+                }
+                
+        }
 }
+
+// MARK: - tableview
 extension MessageListViewController: UITableViewDelegate ,  UITableViewDataSource {
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
                 return ChatItem.CachedChats.count
@@ -106,5 +127,9 @@ extension MessageListViewController: UITableViewDelegate ,  UITableViewDataSourc
                         return c
                 }
                 return cell
+        }
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+                self.SelectedRowID = indexPath.row
+                self.performSegue(withIdentifier: "ShowMessageDetailsSEG", sender: self)
         }
 }
