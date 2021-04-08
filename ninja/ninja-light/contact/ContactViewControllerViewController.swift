@@ -9,14 +9,39 @@ import UIKit
 
 class ContactViewController: UIViewController{
 
+        var selectedRow:Int?
+        var NewCodeStr:String?
+        
+        @IBOutlet weak var tableview: UITableView!
         override func viewDidLoad() {
                 super.viewDidLoad()
+                
+                NotificationCenter.default.addObserver(self, selector:#selector(notifiAction(notification:)),
+                                                               name: NotifyContactChanged, object: nil)
+                
+                self.tableview.rowHeight = 60
+                self.reload()
+        }
+        
+        deinit {
+            NotificationCenter.default.removeObserver(self)
+        }
+        @objc func notifiAction(notification:NSNotification){
+                self.reload()
         }
         
         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
                 if segue.identifier == "ShowQRScanerID"{
                         let vc : ScannerViewController = segue.destination as! ScannerViewController
                         vc.delegate = self
+                }else if segue.identifier == "ContactDetailsViewController"{
+                        let vc : ContactDetailsViewController = segue.destination as! ContactDetailsViewController
+                        guard let idx = self.selectedRow else{
+                                vc.itemUID = self.NewCodeStr
+                                return
+                        }
+                        let item = ContactItem.cache[idx]
+                        vc.itemData = item
                 }
         }
         
@@ -24,16 +49,44 @@ class ContactViewController: UIViewController{
                 self.performSegue(withIdentifier: "ShowQRScanerID", sender: self)
         }
         
+        private func reload(){
+                ContactItem.LocalSavedContact()
+                DispatchQueue.main.async {
+                        self.tableview.reloadData()
+                }
+        }
 }
 
 extension ContactViewController:ScannerViewControllerDelegate{
         
         func codeDetected(code: String) {
                 NSLog("\(code)")
-                guard let err = ContactItem.AddNewContact(code) else{
+                if !ContactItem.IsValidContactID(code){
+                        self.toastMessage(title: "invalid ninja address")
                         return
                 }
                 
-                self.toastMessage(title: err.localizedDescription)
+                self.NewCodeStr = code
+                self.performSegue(withIdentifier: "ContactDetailsViewController", sender: self)
+        }
+}
+extension ContactViewController:UITableViewDelegate, UITableViewDataSource{
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+                return ContactItem.cache.count
+        }
+        
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ContactItemTableViewCell", for: indexPath)
+                if let c = cell as? ContactItemTableViewCell{
+                        let item = ContactItem.cache[indexPath.row]
+                        c.initWith(details:item, idx: indexPath.row)
+                        return c
+                }
+                return cell
+        }
+        
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+                self.selectedRow = indexPath.row
+                self.performSegue(withIdentifier: "ContactDetailsViewController", sender: self)
         }
 }

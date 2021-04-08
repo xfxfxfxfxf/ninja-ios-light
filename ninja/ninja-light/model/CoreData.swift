@@ -65,8 +65,8 @@ class CDManager:NSObject{
 
 extension CDManager{
         
-        func Get<T>(entity:String, predicate:String?,
-                    sort:[[String:Bool]]?, limit:Int?)throws ->[T] where T: ModelObj{
+        func Get<T>(entity:String, predicate:String? = nil,
+                    sort:[[String:Bool]]? = nil, limit:Int? = nil)throws ->[T] where T: ModelObj{
                 let managedContext = persistentContainer.viewContext
                 let fetchRequest =  NSFetchRequest<NSManagedObject>(entityName: entity)
                 
