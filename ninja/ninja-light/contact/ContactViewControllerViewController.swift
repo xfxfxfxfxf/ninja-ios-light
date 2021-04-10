@@ -30,37 +30,6 @@ class ContactViewController: UIViewController{
                 self.reload()
         }
         
-        override func viewWillAppear(_ animated: Bool) {
-                super.viewWillAppear(animated)
-                guard Wallet.shared.IsActive() else{
-                        self.activeAccount()
-                        return
-                }
-        }
-        
-        private func activeAccount(){
-                self.showIndicator(withTitle:"Wallet",  and: "Opening")
-                
-                let ap = AlertPayload(title: "Unlock", placeholderTxt: "Password"){
-                        (password, isOK) in
-                        
-                        defer{
-                                self.hideIndicator()
-                        }
-                        guard let pwd = password, isOK else{
-                                self.toastMessage(title: "no right to load contact")
-                                return
-                        }
-                        guard let err = ServiceDelegate.InitService(pwd) else{
-                                self.reload()
-                                return
-                        }
-                        self.toastMessage(title: err.localizedDescription)
-                }
-                
-                LoadAlertFromStoryBoard(payload: ap)
-        }
-        
         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
                 if segue.identifier == "ShowQRScanerID"{
                         let vc : ScannerViewController = segue.destination as! ScannerViewController

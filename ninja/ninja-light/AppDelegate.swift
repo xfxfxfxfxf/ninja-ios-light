@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // Override point for customization after application launch.
                 if Wallet.shared.loaded{
                         window?.rootViewController = instantiateViewController(vcID: "NinjaHomeTabVC")
+                        ServiceDelegate.InitService()
                 }else{
                         window?.rootViewController = instantiateViewController(vcID: "NinjaNewWalletVC")
                 }

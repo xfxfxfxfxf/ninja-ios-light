@@ -57,7 +57,7 @@ extension UIViewController {
                 hud.removeFromSuperViewOnHide = true
                 hud.margin = 10
                 hud.offset.y = 250.0
-                hud.hide(animated: true, afterDelay: 3)
+                hud.hide(animated: true, afterDelay: 5)
         }}
         
  

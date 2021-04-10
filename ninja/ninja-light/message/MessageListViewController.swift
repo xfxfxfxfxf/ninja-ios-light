@@ -80,21 +80,21 @@ class MessageListViewController: UIViewController {
                 let ap = AlertPayload(title: "Unlock", placeholderTxt: "Password"){
                         (password, isOK) in
                         
-                        defer{
-                                self.hideIndicator()
-                                self.refreshControl.endRefreshing()
-                        }
+                       
+                        self.hideIndicator()
+//                                self.refreshControl.endRefreshing()
                         guard let pwd = password, isOK else{
-                                self.tableTopConstraint.constant = 30
-                                self.errorTips.isHidden = false
-                                self.errorTips.text = "App is Locked"
+                                self.toastMessage(title: "Must unlock account")
                                 return
                         }
-                        guard let err = ServiceDelegate.InitService(pwd) else{
+                        
+                        guard let err = Wallet.shared.Active(pwd) else{
                                 self.hideErrorTips()
                                 return
                         }
-                        self.showErrorTips(err: err)
+                        NSLog("======>\(err.localizedDescription)")
+                        self.toastMessage(title: err.localizedDescription)
+                        return
                 }
                 
                 LoadAlertFromStoryBoard(payload: ap)

@@ -36,7 +36,9 @@
 
 FOUNDATION_EXPORT NSString* _Nonnull IosLibActiveAddress(void);
 
-FOUNDATION_EXPORT BOOL IosLibInitApp(NSString* _Nullable cipherTxt, NSString* _Nullable auth, NSString* _Nullable addr, id<IosLibAppCallBack> _Nullable callback, NSError* _Nullable* _Nullable error);
+FOUNDATION_EXPORT BOOL IosLibActiveWallet(NSString* _Nullable cipherTxt, NSString* _Nullable auth, NSError* _Nullable* _Nullable error);
+
+FOUNDATION_EXPORT void IosLibConfigApp(NSString* _Nullable addr, id<IosLibAppCallBack> _Nullable callback);
 
 FOUNDATION_EXPORT BOOL IosLibIsValidNinjaAddr(NSString* _Nullable addr);
 

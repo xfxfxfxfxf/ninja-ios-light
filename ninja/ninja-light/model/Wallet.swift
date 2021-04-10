@@ -61,6 +61,12 @@ class Wallet:NSObject{
         func IsActive()->Bool{
                 return IosLib.IosLibWalletIsOpen()
         }
+        
+        func Active(_ password:String)-> Error?{
+                var error:NSError? = nil
+                IosLib.IosLibActiveWallet(self.wJson, password, &error)
+                return error
+        }
 }
 
 extension Wallet:ModelObj{
