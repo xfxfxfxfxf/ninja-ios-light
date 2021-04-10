@@ -65,13 +65,13 @@ class CDManager:NSObject{
 
 extension CDManager{
         
-        func Get<T>(entity:String, predicate:String? = nil,
+        func Get<T>(entity:String, predicate:NSPredicate? = nil,
                     sort:[[String:Bool]]? = nil, limit:Int? = nil)throws ->[T] where T: ModelObj{
                 let managedContext = persistentContainer.viewContext
                 let fetchRequest =  NSFetchRequest<NSManagedObject>(entityName: entity)
                 
                 if let myPredicate = predicate {
-                        fetchRequest.predicate = NSPredicate(format: myPredicate)
+                        fetchRequest.predicate = myPredicate
                 }
                 
                 if let mySort = sort {
@@ -101,7 +101,7 @@ extension CDManager{
                 return result
         }
         
-        func GetOne<T>(entity:String, predicate:String?)throws -> T?  where T: ModelObj{
+        func GetOne<T>(entity:String, predicate:NSPredicate?)throws -> T?  where T: ModelObj{
                 var result:[T] = []
                 result = try self.Get(entity: entity, predicate: predicate, sort: nil, limit: 1)
                 if result.count == 0{

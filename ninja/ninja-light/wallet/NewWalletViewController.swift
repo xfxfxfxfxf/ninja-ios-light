@@ -28,9 +28,17 @@ class NewWalletViewController: UIViewController {
                 }
                 
                 do {
+                        
                         try Wallet.shared.New(password)
-                        let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as! SceneDelegate
-                        sceneDelegate.window!.rootViewController =  instantiateViewController(vcID: "NinjaHomeTabVC")
+                        if #available(iOS 13.0, *) {
+                                let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as! SceneDelegate
+                                sceneDelegate.window!.rootViewController =  instantiateViewController(vcID: "NinjaHomeTabVC")
+                        } else {
+                                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                                appDelegate.window?.rootViewController = instantiateViewController(vcID: "NinjaHomeTabVC")
+                                appDelegate.window?.makeKeyAndVisible()
+                        }
+                        
                 }catch let err as NSError{
                         self.toastMessage(title: err.localizedDescription)
                 }

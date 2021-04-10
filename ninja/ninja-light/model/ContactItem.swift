@@ -36,7 +36,8 @@ class ContactItem:NSObject{
         
         public static func GetContact(_ uid:String) -> ContactItem?{
                 var obj:ContactItem?
-                obj = try? CDManager.shared.GetOne(entity: "CDContact", predicate: "uid == \(uid)")
+                obj = try? CDManager.shared.GetOne(entity: "CDContact",
+                                                   predicate:NSPredicate(format: "uid == %@", uid))
                 return obj
         }
         
@@ -54,7 +55,7 @@ class ContactItem:NSObject{
                 }
                 var result:[ContactItem]?
                 result = try? CDManager.shared.Get(entity: "CDContact",
-                                                   predicate: "owner == \(owner)",
+                                                   predicate: NSPredicate(format:"owner == %@", owner) ,
                                                    sort: [["nickName" : true]])
                 guard let arr = result else {
                         return

@@ -24,10 +24,10 @@ class ContactDetailsViewController: UIViewController {
                         }
                 }
                 
-                self.populateVIew()
+                self.populateView()
         }
         
-        private func populateVIew(){
+        private func populateView(){
                 guard let data = self.itemData else {
                         return
                 }
