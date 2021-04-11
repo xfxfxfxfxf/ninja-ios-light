@@ -34,7 +34,7 @@ class ContactViewController: UIViewController{
                 if segue.identifier == "ShowQRScanerID"{
                         let vc : ScannerViewController = segue.destination as! ScannerViewController
                         vc.delegate = self
-                }else if segue.identifier == "ContactDetailsViewController"{
+                }else if segue.identifier == "ShowContactDetailSeg"{
                         let vc : ContactDetailsViewController = segue.destination as! ContactDetailsViewController
                         guard let idx = self.selectedRow else{
                                 vc.itemUID = self.NewCodeStr
@@ -67,7 +67,7 @@ extension ContactViewController:ScannerViewControllerDelegate{
                 }
                 
                 self.NewCodeStr = code
-                self.performSegue(withIdentifier: "ContactDetailsViewController", sender: self)
+                self.performSegue(withIdentifier: "ShowContactDetailSeg", sender: self)
         }
 }
 extension ContactViewController:UITableViewDelegate, UITableViewDataSource{
@@ -87,6 +87,7 @@ extension ContactViewController:UITableViewDelegate, UITableViewDataSource{
         
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
                 self.selectedRow = indexPath.row
-                self.performSegue(withIdentifier: "ContactDetailsViewController", sender: self)
+                self.NewCodeStr = nil
+                self.performSegue(withIdentifier: "ShowContactDetailSeg", sender: self)
         }
 }

@@ -18,9 +18,13 @@ class ContactDetailsViewController: UIViewController {
         
         override func viewDidLoad() {
                 super.viewDidLoad()
+                self.hideKeyboardWhenTappedAround()
+                
                 if let newUid = self.itemUID{
                         if let obj = ContactItem.GetContact(newUid){
                                 self.itemData = obj
+                        }else{
+                                self.uid.text = newUid
                         }
                 }
                 
@@ -47,9 +51,11 @@ class ContactDetailsViewController: UIViewController {
         
         @IBAction func SaveContact(_ sender: UIButton) {
                 let contact = ContactItem.init()
-                
+                contact.uid = self.uid.text
+                contact.nickName = self.nickName.text
+                contact.remark = remarks.text
+//                contact.avatar = self.avatar.image?.pngData()//TODO::Load avatar from netework
                 guard let err = ContactItem.AddNewContact(contact) else{
-                        
                         NotificationCenter.default.post(name:NotifyContactChanged,
                                                         object: nil, userInfo:nil)
                         self.closeWindow()
