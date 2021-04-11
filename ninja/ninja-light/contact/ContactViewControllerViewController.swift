@@ -46,7 +46,30 @@ class ContactViewController: UIViewController{
         }
         
         @IBAction func NewContact(_ sender: UIBarButtonItem) {
-                self.performSegue(withIdentifier: "ShowQRScanerID", sender: self)
+                
+                let alertController = UIAlertController(title: nil, message: "Alert message.", preferredStyle: .actionSheet)
+                alertController.modalPresentationStyle = .popover
+                
+                let defaultAction = UIAlertAction(title: "Scan QR", style: .default, handler: { (alert: UIAlertAction!) -> Void in
+                        self.performSegue(withIdentifier: "ShowQRScanerID", sender: self)
+                })
+
+                let deleteAction = UIAlertAction(title: "New", style: .default, handler: { (alert: UIAlertAction!) -> Void in
+                        self.performSegue(withIdentifier: "ShowContactDetailSeg", sender: self)
+                })
+
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+
+                alertController.addAction(defaultAction)
+                alertController.addAction(deleteAction)
+                alertController.addAction(cancelAction)
+
+                if let popoverController = alertController.popoverPresentationController {
+                        popoverController.barButtonItem = sender
+                }
+
+                self.present(alertController, animated: true, completion: nil)
+                
         }
         
         private func reload(){
