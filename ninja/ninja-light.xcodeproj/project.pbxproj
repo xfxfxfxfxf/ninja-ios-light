@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6953EAF82622C12F008EC2F0 /* AuthorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6953EAF72622C12F008EC2F0 /* AuthorViewController.swift */; };
+		6953EAF92622C12F008EC2F0 /* AuthorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6953EAF72622C12F008EC2F0 /* AuthorViewController.swift */; };
 		6969ECBC26134294008CB0B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6969ECBB26134294008CB0B2 /* AppDelegate.swift */; };
 		6969ECBE26134294008CB0B2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6969ECBD26134294008CB0B2 /* SceneDelegate.swift */; };
 		6969ECC026134294008CB0B2 /* ContactViewControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6969ECBF26134294008CB0B2 /* ContactViewControllerViewController.swift */; };
@@ -76,6 +78,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6953EAF72622C12F008EC2F0 /* AuthorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorViewController.swift; sourceTree = "<group>"; };
 		6969ECB826134294008CB0B2 /* ninja-light.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ninja-light.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6969ECBB26134294008CB0B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6969ECBD26134294008CB0B2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -188,6 +191,7 @@
 				6969ECD426134450008CB0B2 /* MsgViewController.swift */,
 				69B8C0CC261D2C0900B4E4AC /* MessageListViewController.swift */,
 				69B8C0D1261D2D4600B4E4AC /* MesasgeItemTableViewCell.swift */,
+				6953EAF72622C12F008EC2F0 /* AuthorViewController.swift */,
 			);
 			path = message;
 			sourceTree = "<group>";
@@ -399,6 +403,7 @@
 				69B8C0CD261D2C0900B4E4AC /* MessageListViewController.swift in Sources */,
 				69B8C0BC261C683100B4E4AC /* NJError.swift in Sources */,
 				69B8C0D2261D2D4600B4E4AC /* MesasgeItemTableViewCell.swift in Sources */,
+				6953EAF82622C12F008EC2F0 /* AuthorViewController.swift in Sources */,
 				69F8D102261AA615009D7AF3 /* Wallet.swift in Sources */,
 				69B8C0DC261D334100B4E4AC /* ChatItem.swift in Sources */,
 				69B8C0EA261D9FB100B4E4AC /* QRCodeShowViewController.swift in Sources */,
@@ -431,6 +436,7 @@
 				69B8C0CE261D2C0900B4E4AC /* MessageListViewController.swift in Sources */,
 				69B8C0BF261C689C00B4E4AC /* NJError.swift in Sources */,
 				69B8C0D3261D2D4600B4E4AC /* MesasgeItemTableViewCell.swift in Sources */,
+				6953EAF92622C12F008EC2F0 /* AuthorViewController.swift in Sources */,
 				69B8C091261C5E1200B4E4AC /* Wallet.swift in Sources */,
 				69B8C0DD261D334100B4E4AC /* ChatItem.swift in Sources */,
 				69B8C0EB261D9FB100B4E4AC /* QRCodeShowViewController.swift in Sources */,

@@ -23,16 +23,14 @@ class MessageListViewController: UIViewController {
         }
         //MARK: - object c
         @objc func reloadChatRoom(_ sender: Any?){
-                if !Wallet.shared.IsActive(){
-                        self.activeAccount()
-                }
+              //TODO::fetch unread message
                 
 //                ServiceDelegate.workQueue.async {
 //                        ChatItem.ReloadChatRoom()
-//                        DispatchQueue.main.async {
-//                                self.refreshControl.endRefreshing()
-//                                self.tableView.reloadData()
-//                        }
+                        DispatchQueue.main.async {
+                                self.refreshControl.endRefreshing()
+                                self.tableView.reloadData()
+                        }
 //                }
         }
         
@@ -46,7 +44,7 @@ class MessageListViewController: UIViewController {
                 }
                 
                 guard Wallet.shared.IsActive() else{
-                        self.activeAccount()
+                        self.performSegue(withIdentifier: "ShowAutherSEG", sender: self)
                         return
                 }
                 
@@ -73,33 +71,6 @@ class MessageListViewController: UIViewController {
                         self.errorTips.text = ""
                 }
         }
-        
-        private func activeAccount(){
-                self.showIndicator(withTitle:"Wallet",  and: "Opening")
-                
-                let ap = AlertPayload(title: "Unlock", placeholderTxt: "Password"){
-                        (password, isOK) in
-                        
-                       
-                        self.hideIndicator()
-//                                self.refreshControl.endRefreshing()
-                        guard let pwd = password, isOK else{
-                                self.toastMessage(title: "Must unlock account")
-                                return
-                        }
-                        
-                        guard let err = Wallet.shared.Active(pwd) else{
-                                self.hideErrorTips()
-                                return
-                        }
-                        NSLog("======>\(err.localizedDescription)")
-                        self.toastMessage(title: err.localizedDescription)
-                        return
-                }
-                
-                LoadAlertFromStoryBoard(payload: ap)
-        }
-
     
     // MARK: - Navigation
         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
