@@ -55,6 +55,8 @@ class ContactViewController: UIViewController{
                 })
 
                 let deleteAction = UIAlertAction(title: "New", style: .default, handler: { (alert: UIAlertAction!) -> Void in
+                        self.selectedRow = nil
+                        self.NewCodeStr = nil
                         self.performSegue(withIdentifier: "ShowContactDetailSeg", sender: self)
                 })
 

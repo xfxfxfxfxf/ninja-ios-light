@@ -21,15 +21,36 @@
                                 <rect key="frame" x="12" y="32" width="390" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password Again" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rlg-8h-idd">
                                 <rect key="frame" x="12" y="78" width="390" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lws-69-BrK">
-                                <rect key="frame" x="20" y="146" width="374" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <rect key="frame" x="20" y="146" width="374" height="44"/>
+                                <color key="backgroundColor" red="0.96862745100000003" green="0.66666666669999997" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="ACB-lj-HKd"/>
+                                </constraints>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.97254901959999995" green="0.97639149430000005" blue="0.9797351956" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="CreateWallet:" destination="z3r-xq-XGc" eventType="touchUpInside" id="kVl-eQ-0f7"/>
                                 </connections>
@@ -84,6 +105,11 @@
                                                         <constraint firstAttribute="width" constant="60" id="Oqg-A4-JOe"/>
                                                         <constraint firstAttribute="height" constant="60" id="ka9-OP-ASn"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="4"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zrz-3G-5xv">
                                                     <rect key="frame" x="82" y="16" width="42" height="21"/>
@@ -184,6 +210,11 @@
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="send"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3PT-li-hxz">
                                 <rect key="frame" x="10" y="304" width="394" height="499"/>
@@ -191,13 +222,26 @@
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LiM-6O-2tX">
                                 <rect key="frame" x="20" y="250" width="374" height="44"/>
+                                <color key="backgroundColor" red="0.42745098040000001" green="0.59215686270000001" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="RM0-oQ-Gri"/>
                                 </constraints>
-                                <state key="normal" title="Send"/>
+                                <state key="normal" title="Send">
+                                    <color key="titleColor" red="0.96862745100000003" green="0.66666666669999997" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -312,25 +356,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Oj-Xm-CNd">
-                                <rect key="frame" x="40" y="520" width="334" height="44"/>
-                                <color key="backgroundColor" red="0.42745098040000001" green="0.66666666669999997" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="egp-nk-OtN"/>
-                                </constraints>
-                                <state key="normal" title="Cancel"/>
-                                <connections>
-                                    <action selector="Cancel:" destination="f4X-jQ-OkL" eventType="touchUpInside" id="doE-qp-YnQ"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3je-9Q-HmJ">
-                                <rect key="frame" x="40" y="468" width="334" height="44"/>
+                                <rect key="frame" x="40" y="428" width="334" height="44"/>
                                 <color key="backgroundColor" red="0.29803921570000003" green="0.76078431369999999" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Jjs-DG-Rk0"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="jK3-Jf-GVs"/>
                                 </constraints>
                                 <state key="normal" title="Save"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="SaveContact:" destination="f4X-jQ-OkL" eventType="touchUpInside" id="GaV-jz-gai"/>
                                 </connections>
@@ -349,16 +387,26 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="memo" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="C8w-iz-DHr">
-                                <rect key="frame" x="20" y="336" width="374" height="120"/>
+                                <rect key="frame" x="20" y="336" width="374" height="80"/>
                                 <color key="backgroundColor" red="0.42745098040000001" green="0.59215686270000001" blue="0.80784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="xDa-fB-bcd"/>
+                                    <constraint firstAttribute="height" constant="80" id="xDa-fB-bcd"/>
                                 </constraints>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </textView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f84-hn-ivR">
                                 <rect key="frame" x="40" y="749" width="334" height="44"/>
@@ -367,6 +415,11 @@
                                     <constraint firstAttribute="height" constant="44" id="1Vm-7O-2T8"/>
                                 </constraints>
                                 <state key="normal" title="Chat"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="StartChat:" destination="f4X-jQ-OkL" eventType="touchUpInside" id="DHf-KD-7sV"/>
                                 </connections>
@@ -380,6 +433,11 @@
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gpv-6t-OUL"/>
@@ -387,19 +445,16 @@
                         <constraints>
                             <constraint firstItem="8ki-J9-z4D" firstAttribute="top" secondItem="gpv-6t-OUL" secondAttribute="top" constant="20" id="2uv-AV-fty"/>
                             <constraint firstItem="271-WW-t2H" firstAttribute="leading" secondItem="gpv-6t-OUL" secondAttribute="leading" constant="20" id="52u-3D-USe"/>
-                            <constraint firstItem="8Oj-Xm-CNd" firstAttribute="top" secondItem="3je-9Q-HmJ" secondAttribute="bottom" constant="8" id="6po-Q7-QHX"/>
                             <constraint firstItem="gpv-6t-OUL" firstAttribute="trailing" secondItem="C8w-iz-DHr" secondAttribute="trailing" constant="20" id="Cc3-pU-sHf"/>
                             <constraint firstItem="gpv-6t-OUL" firstAttribute="trailing" secondItem="3je-9Q-HmJ" secondAttribute="trailing" constant="40" id="DrD-VM-Eqy"/>
                             <constraint firstItem="hPA-Jj-NYc" firstAttribute="leading" secondItem="8ki-J9-z4D" secondAttribute="trailing" constant="8" id="GRX-Cb-EOX"/>
                             <constraint firstItem="gpv-6t-OUL" firstAttribute="trailing" secondItem="271-WW-t2H" secondAttribute="trailing" constant="20" id="Gfk-Vr-3f9"/>
-                            <constraint firstItem="gpv-6t-OUL" firstAttribute="trailing" secondItem="8Oj-Xm-CNd" secondAttribute="trailing" constant="40" id="Gxa-XV-WgG"/>
                             <constraint firstItem="3je-9Q-HmJ" firstAttribute="leading" secondItem="gpv-6t-OUL" secondAttribute="leading" constant="40" id="Rwo-8D-zSc"/>
                             <constraint firstItem="gpv-6t-OUL" firstAttribute="trailing" secondItem="f84-hn-ivR" secondAttribute="trailing" constant="40" id="TWC-qW-8Xn"/>
                             <constraint firstItem="271-WW-t2H" firstAttribute="top" secondItem="8ki-J9-z4D" secondAttribute="bottom" constant="8" id="WSX-95-iHm"/>
                             <constraint firstItem="C8w-iz-DHr" firstAttribute="top" secondItem="271-WW-t2H" secondAttribute="bottom" constant="20" id="Z1p-fF-ZBc"/>
                             <constraint firstItem="f84-hn-ivR" firstAttribute="leading" secondItem="gpv-6t-OUL" secondAttribute="leading" constant="40" id="bwu-Zb-MrB"/>
                             <constraint firstItem="hPA-Jj-NYc" firstAttribute="top" secondItem="gpv-6t-OUL" secondAttribute="top" constant="20" id="eUp-GP-fWn"/>
-                            <constraint firstItem="8Oj-Xm-CNd" firstAttribute="leading" secondItem="gpv-6t-OUL" secondAttribute="leading" constant="40" id="hHg-vq-671"/>
                             <constraint firstItem="3je-9Q-HmJ" firstAttribute="top" secondItem="C8w-iz-DHr" secondAttribute="bottom" constant="12" id="ixb-Iz-ssj"/>
                             <constraint firstItem="C8w-iz-DHr" firstAttribute="leading" secondItem="gpv-6t-OUL" secondAttribute="leading" constant="20" id="jmB-Uc-udB"/>
                             <constraint firstItem="gpv-6t-OUL" firstAttribute="trailing" secondItem="hPA-Jj-NYc" secondAttribute="trailing" constant="20" id="mUw-9B-d97"/>
@@ -407,10 +462,18 @@
                             <constraint firstItem="gpv-6t-OUL" firstAttribute="bottom" secondItem="f84-hn-ivR" secondAttribute="bottom" constant="20" id="ush-aH-hHn"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="nKt-ai-skV"/>
+                    <navigationItem key="navigationItem" id="nKt-ai-skV">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="trash" id="Gsn-66-EFu">
+                            <color key="tintColor" red="0.96862745100000003" green="0.66666666669999997" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="DeleteContact:" destination="f4X-jQ-OkL" id="iQj-cz-Qko"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="avatar" destination="8ki-J9-z4D" id="8A2-yR-cVn"/>
                         <outlet property="chatBtn" destination="f84-hn-ivR" id="O5k-mY-Y6B"/>
+                        <outlet property="delBarBtn" destination="Gsn-66-EFu" id="NLj-b7-vAn"/>
                         <outlet property="nickName" destination="hPA-Jj-NYc" id="MVg-p0-zq3"/>
                         <outlet property="remarks" destination="C8w-iz-DHr" id="Z0N-9B-kc9"/>
                         <outlet property="uid" destination="271-WW-t2H" id="F3b-Tm-z0Z"/>
@@ -435,6 +498,11 @@
                                     <constraint firstAttribute="height" constant="120" id="CyJ-Yi-MDp"/>
                                     <constraint firstAttribute="width" constant="120" id="pkb-sL-m0f"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8oT-CU-FA6">
                                 <rect key="frame" x="148" y="100" width="258" height="64"/>
@@ -491,6 +559,11 @@
                                     <constraint firstAttribute="height" constant="32" id="wKP-Mz-uZu"/>
                                 </constraints>
                                 <state key="normal" image="&gt;_icon"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="ChangeNickName:" destination="p2e-wl-4Im" eventType="touchUpInside" id="MVU-9m-OEj"/>
                                 </connections>
@@ -545,8 +618,13 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xSc-L4-7Bd">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tips:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xSc-L4-7Bd">
                                 <rect key="frame" x="20" y="20" width="374" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="zuJ-QP-7Pg"/>
@@ -556,8 +634,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evn-J2-Mxq">
-                                <rect key="frame" x="44" y="194" width="326" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <rect key="frame" x="44" y="194" width="326" height="44"/>
+                                <color key="backgroundColor" red="0.96862745100000003" green="0.66666666669999997" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="lmY-h2-9MJ"/>
+                                </constraints>
+                                <state key="normal" title="Author"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="Auth:" destination="wtG-an-lgA" eventType="touchUpInside" id="fjh-4T-R9g"/>
                                 </connections>
@@ -716,17 +803,17 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="guj-7p-IMj">
                                 <rect key="frame" x="16" y="124" width="109.5" height="44"/>
-                                <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.96862745100000003" green="0.66666666669999997" blue="0.80784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="NaL-a8-Med"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
                                 <state key="normal" title="Cancel">
-                                    <color key="titleColor" red="0.098039215690000001" green="0.098039215690000001" blue="0.1137254902" alpha="0.64000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.42745098040000001" green="0.59215686270000001" blue="0.80784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="22"/>
+                                        <integer key="value" value="20"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -735,17 +822,17 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t5F-AF-9qE">
                                 <rect key="frame" x="144.5" y="124" width="109.5" height="44"/>
-                                <color key="backgroundColor" red="0.015686274510000001" green="0.023529411760000001" blue="0.18039215689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.42745098040000001" green="0.66666666669999997" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="KnP-Ie-3qy"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="14"/>
                                 <state key="normal" title="OK">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" red="0.96862745100000003" green="0.66666666669999997" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="22"/>
+                                        <integer key="value" value="20"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -852,7 +939,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QCN-Lq-vA1">
                                 <rect key="frame" x="79" y="744" width="256" height="44"/>
-                                <color key="backgroundColor" red="0.098039215690000001" green="0.10980392160000001" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.96862745100000003" green="0.66666666669999997" blue="0.80784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="256" id="0CG-Oh-hVY"/>
                                     <constraint firstAttribute="height" constant="44" id="2XM-9K-9XC"/>
@@ -861,6 +948,11 @@
                                 <state key="normal" title="Cancel">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="Cancel:" destination="jap-e5-yU3" eventType="touchUpInside" id="qkO-lq-HJQ"/>
                                 </connections>

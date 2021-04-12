@@ -92,16 +92,16 @@ extension CDManager{
                 }
                 
                 var result:[T] = []
-                        let objArr = try managedContext.fetch(fetchRequest)
-                        for obj in objArr {
-                                let t = T.init()
-                                try t.initByObj(obj:obj)
-                                result.append(t)
-                        }
+                let objArr = try managedContext.fetch(fetchRequest)
+                for obj in objArr {
+                        let t = T.init()
+                        try t.initByObj(obj:obj)
+                        result.append(t)
+                }
                 return result
         }
         
-        func GetOne<T>(entity:String, predicate:NSPredicate?)throws -> T?  where T: ModelObj{
+        func GetOne<T>(entity:String, predicate:NSPredicate? = nil)throws -> T?  where T: ModelObj{
                 var result:[T] = []
                 result = try self.Get(entity: entity, predicate: predicate, sort: nil, limit: 1)
                 if result.count == 0{
@@ -110,7 +110,29 @@ extension CDManager{
                 return result.first
         }
         
-        func Save<T>(entity:String, m:T)throws where T: ModelObj{
+        func UpdateOrAddOne<T>(entity:String, m:T, predicate:NSPredicate? = nil)throws where T: ModelObj{
+                
+                let managedContext = persistentContainer.viewContext
+                let fetchRequest =  NSFetchRequest<NSManagedObject>(entityName: entity)
+                
+                if let myPredicate = predicate {
+                        fetchRequest.predicate = myPredicate
+                }
+                fetchRequest.fetchLimit = 1
+                let objArr = try managedContext.fetch(fetchRequest)
+                
+                if objArr.count == 0{
+                        try self.AddEntity(entity: entity, m: m)
+                        return
+                }
+                let object = objArr.first!
+                
+                try m.fullFillObj(obj: object)
+                
+                try managedContext.save()
+        }
+        
+        func AddEntity<T>(entity:String, m:T)throws where T: ModelObj{
                 let managedContext = persistentContainer.viewContext
                   
                  
@@ -125,32 +147,23 @@ extension CDManager{
                 try managedContext.save()
         }
         
-        func Delete(entity:String, predicate:String?){
+        func Delete(entity:String, predicate:NSPredicate? = nil)throws{
                 let managedContext = persistentContainer.viewContext
                 let fetchRequest =  NSFetchRequest<NSManagedObject>(entityName: entity)
                 
                 if let myPredicate = predicate {
-                        fetchRequest.predicate = NSPredicate(format: myPredicate)
+                        fetchRequest.predicate = myPredicate
                 }
-                do {
-                        let objArr = try managedContext.fetch(fetchRequest)
-                        for obj in objArr {
-                                managedContext.delete(obj)
-                        }
-                        try managedContext.save()
-                } catch let error as NSError{
-                        print("Could not save. \(error), \(error.userInfo)")
+                let objArr = try managedContext.fetch(fetchRequest)
+                for obj in objArr {
+                        managedContext.delete(obj)
                 }
+                try managedContext.save()
         }
         
-        func DeleteObj(obj:NSManagedObject){
-                
+        func DeleteObj(obj:NSManagedObject) throws{
                 let managedContext = persistentContainer.viewContext
                 managedContext.delete(obj)
-                do {
-                        try managedContext.save()
-                } catch let error as NSError{
-                        print("Could not save. \(error), \(error.userInfo)")
-                }
+                try managedContext.save()
         }
 }

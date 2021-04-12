@@ -14,6 +14,9 @@ class ContactDetailsViewController: UIViewController {
         @IBOutlet weak var nickName: UITextField!
         @IBOutlet weak var avatar: UIImageView!
         @IBOutlet weak var chatBtn: UIButton!
+        @IBOutlet weak var delBarBtn: UIBarButtonItem!
+        
+        
         var itemUID:String?
         var itemData:ContactItem?
         
@@ -37,7 +40,9 @@ class ContactDetailsViewController: UIViewController {
                 guard let data = self.itemData else {
                         return
                 }
+                
                 self.chatBtn.isHidden = false
+                self.delBarBtn.isEnabled = true
                 self.uid.isEditable = false
                 self.uid.text = data.uid
                 self.nickName.text = data.nickName
@@ -58,7 +63,7 @@ class ContactDetailsViewController: UIViewController {
                 contact.nickName = self.nickName.text
                 contact.remark = remarks.text
 //                contact.avatar = self.avatar.image?.pngData()//TODO::Load avatar from netework
-                guard let err = ContactItem.AddNewContact(contact) else{
+                guard let err = ContactItem.UpdateContact(contact) else{
                         NotificationCenter.default.post(name:NotifyContactChanged,
                                                         object: nil, userInfo:nil)
                         self.closeWindow()
@@ -68,9 +73,21 @@ class ContactDetailsViewController: UIViewController {
                 self.toastMessage(title: err.localizedDescription)
         }
         
-        @IBAction func Cancel(_ sender: UIButton) {
-                self.closeWindow()
+        @IBAction func DeleteContact(_ sender: UIBarButtonItem) {
+                guard let uid = self.uid.text else{
+                        return
+                }
+                
+                guard let err = ContactItem.DelContact(uid) else{
+                        NotificationCenter.default.post(name:NotifyContactChanged,
+                                                        object: nil, userInfo:nil)
+                        self.closeWindow()
+                        return
+                }
+                
+                self.toastMessage(title: err.localizedDescription)
         }
+        
         
         @IBAction func StartChat(_ sender: UIButton) {
                 guard self.itemData != nil else {

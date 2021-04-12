@@ -12,38 +12,51 @@ import IosLib
 class ContactItem:NSObject{
         public static var cache:[ContactItem]=[]
         
-        var obj:CDContact?
-        lazy var uid:String? = {
-                return self.obj?.uid
-        }()
+        var uid:String?
+        var nickName:String?
+        var avatar:Data?
+        var remark:String?
+        var owner:String?
         
-        lazy var nickName:String? = {
-                return self.obj?.nickName
-        }()
-        
-        lazy var avatar:Data? = {
-                return self.obj?.avatar
-        }()
-        lazy var remark:String? = {
-                return self.obj?.remark
-        }()
-        lazy var owner:String? = {
-                return Wallet.shared.Addr
-        }()
         override init() {
                 super.init()
         }
         
         public static func GetContact(_ uid:String) -> ContactItem?{
                 var obj:ContactItem?
+                let owner = Wallet.shared.Addr!
                 obj = try? CDManager.shared.GetOne(entity: "CDContact",
-                                                   predicate:NSPredicate(format: "uid == %@", uid))
+                                                   predicate:NSPredicate(format: "uid == %@ AND owner == %@",
+                                                                         uid, owner))
                 return obj
         }
         
-        public static func AddNewContact(_ contact:ContactItem) -> NJError?{
+        public static func UpdateContact(_ contact:ContactItem) -> NJError?{
                 contact.owner = Wallet.shared.Addr!
-                do {try CDManager.shared.Save(entity: "CDContact", m: contact)}catch let err{
+                do {
+                        try CDManager.shared.UpdateOrAddOne(entity: "CDContact",
+                                                            m: contact,
+                                                            predicate: NSPredicate(format: "uid == %@ AND owner == %@",
+                                                                                   contact.uid!,
+                                                                                   contact.owner!)
+                        )
+                        
+                }catch let err{
+                        return NJError.contact(err.localizedDescription)
+                }
+                return nil
+        }
+        
+        public static func DelContact(_ uid:String) -> NJError?{
+                let owner = Wallet.shared.Addr!
+                do {
+                        try CDManager.shared.Delete(entity: "CDContact",
+                                                            predicate: NSPredicate(format: "uid == %@ AND owner == %@",
+                                                                                   uid,
+                                                                                   owner)
+                        )
+                        
+                }catch let err{
                         return NJError.contact(err.localizedDescription)
                 }
                 return nil
@@ -70,6 +83,7 @@ class ContactItem:NSObject{
 }
 
 extension ContactItem:ModelObj{
+        
         func fullFillObj(obj: NSManagedObject) throws {
                 guard let cObj = obj as? CDContact else{
                         throw NJError.coreData("Cast to CDContact failed")

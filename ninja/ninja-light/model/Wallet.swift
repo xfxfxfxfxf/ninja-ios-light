@@ -56,7 +56,7 @@ class Wallet:NSObject{
                 self.Addr = addr
                 self.wJson = walletJson
                 self.loaded = true
-                try CDManager.shared.Save(entity: "CDWallet", m: self)
+                try CDManager.shared.AddEntity(entity: "CDWallet", m: self)
         }
         func IsActive()->Bool{
                 return IosLib.IosLibWalletIsOpen()
