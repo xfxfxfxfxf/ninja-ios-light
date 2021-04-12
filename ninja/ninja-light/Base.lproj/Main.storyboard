@@ -220,7 +220,7 @@
                                 </connections>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3PT-li-hxz">
-                                <rect key="frame" x="10" y="292" width="394" height="511"/>
+                                <rect key="frame" x="10" y="246" width="394" height="557"/>
                                 <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -231,33 +231,15 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LiM-6O-2tX">
-                                <rect key="frame" x="20" y="238" width="374" height="44"/>
-                                <color key="backgroundColor" red="0.42745098040000001" green="0.59215686270000001" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="RM0-oQ-Gri"/>
-                                </constraints>
-                                <state key="normal" title="Send">
-                                    <color key="titleColor" red="0.96862745100000003" green="0.66666666669999997" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="LiM-6O-2tX" secondAttribute="trailing" constant="20" id="B4M-AS-HFr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="3PT-li-hxz" secondAttribute="bottom" constant="10" id="GV4-wi-jU8"/>
-                            <constraint firstItem="3PT-li-hxz" firstAttribute="top" secondItem="LiM-6O-2tX" secondAttribute="bottom" constant="10" id="IQ1-9y-niZ"/>
                             <constraint firstItem="3PT-li-hxz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="O1Z-Np-8ge"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3PT-li-hxz" secondAttribute="trailing" constant="10" id="O5o-LA-3GF"/>
-                            <constraint firstItem="LiM-6O-2tX" firstAttribute="top" secondItem="DCO-BO-ciK" secondAttribute="bottom" constant="12" id="PvF-ca-iqj"/>
+                            <constraint firstItem="3PT-li-hxz" firstAttribute="top" secondItem="DCO-BO-ciK" secondAttribute="bottom" constant="20" id="QY3-oX-lnh"/>
                             <constraint firstItem="DCO-BO-ciK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="18" id="VKo-TX-4DE"/>
-                            <constraint firstItem="LiM-6O-2tX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="YwV-eN-F2Y"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DCO-BO-ciK" secondAttribute="trailing" constant="10" id="bZs-hj-puL"/>
                             <constraint firstItem="DCO-BO-ciK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="clC-kk-hfn"/>
                         </constraints>

@@ -82,7 +82,7 @@ class MessageListViewController: UIViewController {
                                 return
                         }
                         
-                        let item = ChatItem.CachedChats[idx]
+                        let item = ChatItem.SortedArra()[idx]
                         vc.peerUid = item.ItemID
                 }
                 
@@ -99,7 +99,7 @@ extension MessageListViewController: UITableViewDelegate ,  UITableViewDataSourc
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MesasgeItemTableViewCell", for: indexPath)
                 if let c = cell as? MesasgeItemTableViewCell{
                         
-                        let item = ChatItem.CachedChats[indexPath.row]
+                        let item = ChatItem.SortedArra()[indexPath.row]
                         c.initWith(details:item, idx: indexPath.row)
                         return c
                 }

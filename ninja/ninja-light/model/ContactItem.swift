@@ -81,7 +81,7 @@ class ContactItem:NSObject{
         public static func IsValidContactID(_ uid:String)->Bool{
                 return IosLib.IosLibIsValidNinjaAddr(uid)
         }
-        public static func CacheArray() -> [ContactItem]?{
+        public static func CacheArray() -> [ContactItem]{
                 return Array(cache.values)
         }
 }

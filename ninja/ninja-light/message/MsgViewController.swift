@@ -19,6 +19,17 @@ class MsgViewController: UIViewController {
                 super.viewDidLoad()
                 self.hideKeyboardWhenTappedAround()
                 self.populateView()
+                NotificationCenter.default.addObserver(self, selector:#selector(notifiAction(notification:)),
+                                                               name: NotifyMessageChanged, object: nil)
+        }
+        
+        deinit {
+            NotificationCenter.default.removeObserver(self)
+        }
+        
+        // MARK: -TOOD::
+        @objc func notifiAction(notification:NSNotification){
+                //TODO::
         }
         
         private func populateView(){
@@ -29,17 +40,13 @@ class MsgViewController: UIViewController {
                 contactData = ContactItem.cache[uid]
                 self.peerNickName.title = contactData?.nickName
         }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
+        // MARK: - Navigation
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        }
+    
 }
+
 extension MsgViewController:UITextViewDelegate{
         
         func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -49,8 +56,9 @@ extension MsgViewController:UITextViewDelegate{
                         guard let msg = self.sender.text else{
                                 return false
                         }
-                        let cliMsg = CliMessage.init(data: msg.data(using: .utf8)!)
-                        guard let err = WebsocketSrv.shared.SendIMMsg(to: peerUid!, payLoad: cliMsg) else{
+                        let cliMsg = CliMessage.init(to:peerUid!, data: msg.data(using: .utf8)!)
+                        guard let err = WebsocketSrv.shared.SendIMMsg(cliMsg: cliMsg) else{
+                                textView.text = nil
                                 return false
                         }
                         self.toastMessage(title: err.localizedDescription)

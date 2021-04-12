@@ -105,6 +105,5 @@ class ContactDetailsViewController: UIViewController {
                         let vc : MsgViewController = segue.destination as! MsgViewController
                         vc.peerUid = self.uid.text!
                 }
-                
         }
 }

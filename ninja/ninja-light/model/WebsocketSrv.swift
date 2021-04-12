@@ -30,20 +30,27 @@ class WebsocketSrv:NSObject{
                 IosLib.IosLibWSOffline()
         }
         
-        func SendIMMsg(to: String, payLoad:CliMessage) -> NJError?{
+        func SendIMMsg(cliMsg:CliMessage) -> NJError?{
                 var error:NSError?
                 var data:Data
                 do{
-                        data = try payLoad.ToNinjaPayload()
+                        data = try cliMsg.ToNinjaPayload()
                 }catch let err{
                         return NJError.msg(err.localizedDescription)
                 }
                 
                 
-                IosLib.IosLibWriteMessage(to, data, &error)
+                IosLib.IosLibWriteMessage(cliMsg.to, data, &error)
                 if error != nil{
                         return NJError.msg(error!.localizedDescription)
                 }
+                
+                MessageItem.addSentMessage(cliMsg: cliMsg)
+                ChatItem.updateLastMsg(msg: cliMsg, time: Int64(Date().timeIntervalSince1970), unread: 0)
+                NotificationCenter.default.post(name:NotifyMsgSumChanged,
+                                                object: self, userInfo:["peerID":cliMsg.to!])
+                
+                
                 return nil
         }
 }
@@ -52,10 +59,47 @@ extension WebsocketSrv:IosLibAppCallBackProtocol{
         
         func immediateMessage(_ from: String?, to: String?, payload: Data?, time: Int64) throws {
                 
+                let owner = Wallet.shared.Addr!
+                if owner != to{
+                        throw NJError.msg("this im is not for me")
+                }
+                
+                let cliMsg = try CliMessage.FromNinjaPayload(payload!, to: to!)
+                let msg = MessageItem.init(cliMsg:cliMsg, from:from!, time:time)
+                
+                
+                MessageItem.receivedIM(msg: msg)
+                ChatItem.updateLastMsg(msg: cliMsg, time: time, unread: 1)
         }
         
         func unreadMsg(_ jsonData: Data?) throws {
+                guard let data = jsonData else {
+                        return
+                }
                 
+                let json = try JSON(data: data)
+                let receiver = json["receiver"].string
+                let owner = Wallet.shared.Addr!
+                if receiver != owner{
+                        throw NJError.msg("this unread is not for me")
+                }
+                
+                var lastCliMsg:[String:CliMessage] = [:]
+                var lastTime:[String:Int64] = [:]
+                var unreadNo:[String:Int] = [:]
+                
+                for (_,subJson):(String, JSON) in json["payload"]{
+                        let (msg, cliMsg) = MessageItem.InitWith(json:subJson)
+                        MessageItem.addUnread(msg)
+                        let to = msg.to!
+                        if lastTime[to] ?? 0 < msg.timeStamp{
+                                lastCliMsg[to] = cliMsg
+                                lastTime[to] = msg.timeStamp
+                        }
+                        unreadNo[to] = unreadNo[to] ?? 0 + 1
+                }
+                
+                ChatItem.updateAllLastMsg(msg: lastCliMsg, time: lastTime, unread: unreadNo)
         }
         
         func webSocketClosed() {
