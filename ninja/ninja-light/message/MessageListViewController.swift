@@ -83,7 +83,7 @@ class MessageListViewController: UIViewController {
                         }
                         
                         let item = ChatItem.CachedChats[idx]
-                        vc.chatID = item.ItemID
+                        vc.peerUid = item.ItemID
                 }
                 
         }

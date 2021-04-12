@@ -8,16 +8,23 @@
 import Foundation
 import SwiftyJSON
 
+
+enum CMT:Int {
+        case plainTxt
+        case voice
+        case location
+        case contact
+}
+
 class CliMessage: NSObject {
-        enum CMT:Int {
-                case plainTxt
-                case voice
-                case location
-                case contact
-        }
-        
         var type:CMT = .plainTxt
         var data:Data?
+        
+        init(data:Data, type:CMT = .plainTxt) {
+                super.init()
+                self.data = data
+                self.type = type
+        }
         
         func ToNinjaPayload() throws -> Data {
                 var jObj:JSON = [:]
@@ -25,5 +32,4 @@ class CliMessage: NSObject {
                 jObj["data"] = JSON(self.data as Any)
                 return try jObj.rawData()
         }
-        
 }

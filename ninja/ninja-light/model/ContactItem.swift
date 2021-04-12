@@ -10,7 +10,7 @@ import CoreData
 import IosLib
 
 class ContactItem:NSObject{
-        public static var cache:[ContactItem]=[]
+        public static var cache:[String:ContactItem]=[:]
         
         var uid:String?
         var nickName:String?
@@ -73,12 +73,16 @@ class ContactItem:NSObject{
                 guard let arr = result else {
                         return
                 }
-                
-                cache = arr
+                for obj in arr{
+                        cache[obj.uid!] = obj
+                }
         }
         
         public static func IsValidContactID(_ uid:String)->Bool{
                 return IosLib.IosLibIsValidNinjaAddr(uid)
+        }
+        public static func CacheArray() -> [ContactItem]?{
+                return Array(cache.values)
         }
 }
 

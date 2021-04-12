@@ -14,6 +14,7 @@ class MessageItem: NSObject {
 }
 
 extension MessageItem:ModelObj{
+        
         func fullFillObj(obj: NSManagedObject) throws {
                 
         }
@@ -21,6 +22,4 @@ extension MessageItem:ModelObj{
         func initByObj(obj: NSManagedObject) throws {
                 
         }
-        
-        
 }

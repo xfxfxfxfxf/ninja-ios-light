@@ -7,6 +7,7 @@
 
 import Foundation
 import IosLib
+import SwiftyJSON
 
 class WebsocketSrv:NSObject{
         public static var shared = WebsocketSrv()
@@ -27,6 +28,23 @@ class WebsocketSrv:NSObject{
         
         func Offline() {
                 IosLib.IosLibWSOffline()
+        }
+        
+        func SendIMMsg(to: String, payLoad:CliMessage) -> NJError?{
+                var error:NSError?
+                var data:Data
+                do{
+                        data = try payLoad.ToNinjaPayload()
+                }catch let err{
+                        return NJError.msg(err.localizedDescription)
+                }
+                
+                
+                IosLib.IosLibWriteMessage(to, data, &error)
+                if error != nil{
+                        return NJError.msg(error!.localizedDescription)
+                }
+                return nil
         }
 }
 

@@ -40,7 +40,7 @@ class ContactViewController: UIViewController{
                                 vc.itemUID = self.NewCodeStr
                                 return
                         }
-                        let item = ContactItem.cache[idx]
+                        let item = ContactItem.CacheArray()?[idx]
                         vc.itemData = item
                 }
         }
@@ -103,7 +103,7 @@ extension ContactViewController:UITableViewDelegate, UITableViewDataSource{
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContactItemTableViewCell", for: indexPath)
                 if let c = cell as? ContactItemTableViewCell{
-                        let item = ContactItem.cache[indexPath.row]
+                        let item = ContactItem.CacheArray()![indexPath.row]
                         c.initWith(details:item, idx: indexPath.row)
                         return c
                 }

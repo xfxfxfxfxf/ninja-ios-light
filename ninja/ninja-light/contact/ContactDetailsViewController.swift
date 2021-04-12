@@ -90,7 +90,7 @@ class ContactDetailsViewController: UIViewController {
         
         
         @IBAction func StartChat(_ sender: UIButton) {
-                guard self.itemData != nil else {
+                guard self.uid.text != nil else{
                         return
                 }
                 self.performSegue(withIdentifier: "ShowMessageDetailsSEG", sender: self)
@@ -98,9 +98,13 @@ class ContactDetailsViewController: UIViewController {
         
         
         /**/
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+        // MARK: - Navigation
         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+                
+                if segue.identifier == "ShowMessageDetailsSEG"{
+                        let vc : MsgViewController = segue.destination as! MsgViewController
+                        vc.peerUid = self.uid.text!
+                }
+                
         }
 }
