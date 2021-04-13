@@ -19,11 +19,11 @@ enum CMT:Int {
 class CliMessage: NSObject {
         var to:String?
         var type:CMT = .plainTxt
-        var data:Data?
+        var data:String?
         override init(){
                 super.init()
         }
-        init(to:String, data:Data, type:CMT = .plainTxt) {
+        init(to:String, data:String, type:CMT = .plainTxt) {
                 super.init()
                 self.to = to
                 self.data = data
@@ -33,7 +33,7 @@ class CliMessage: NSObject {
         func ToNinjaPayload() throws -> Data {
                 var jObj:JSON = [:]
                 jObj["type"].int = self.type.rawValue
-                jObj["data"].object = self.data as Any
+                jObj["data"].string = self.data!
                 return try jObj.rawData()
         }
         
@@ -42,7 +42,7 @@ class CliMessage: NSObject {
                 
                 let json = try JSON(data: data)
                 cliMsg.type = CMT(rawValue: json["type"].int!) ?? .plainTxt
-                cliMsg.data = json["data"].object as? Data
+                cliMsg.data = json["data"].string
                 cliMsg.to = to
                 
                 return cliMsg
@@ -51,7 +51,7 @@ class CliMessage: NSObject {
         func coinvertToLastMsg() -> String{
                 switch self.type {
                 case .plainTxt:
-                        return String(String.init(data: self.data!, encoding: .utf8)!.prefix(20))
+                        return String(self.data!.prefix(20))
                 case .voice:
                         return "[Voice Message]"
                 case .location:

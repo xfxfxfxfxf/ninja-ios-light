@@ -45,12 +45,8 @@ class WebsocketSrv:NSObject{
                         return NJError.msg(error!.localizedDescription)
                 }
                 
-                MessageItem.addSentMessage(cliMsg: cliMsg)
+                MessageItem.addSentIM(cliMsg: cliMsg)
                 ChatItem.updateLastMsg(msg: cliMsg, time: Int64(Date().timeIntervalSince1970), unread: 0)
-                NotificationCenter.default.post(name:NotifyMsgSumChanged,
-                                                object: self, userInfo:["peerID":cliMsg.to!])
-                
-                
                 return nil
         }
 }

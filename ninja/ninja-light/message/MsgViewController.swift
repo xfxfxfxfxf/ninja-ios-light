@@ -20,16 +20,30 @@ class MsgViewController: UIViewController {
                 self.hideKeyboardWhenTappedAround()
                 self.populateView()
                 NotificationCenter.default.addObserver(self, selector:#selector(notifiAction(notification:)),
-                                                               name: NotifyMessageChanged, object: nil)
+                                                               name: NotifyMessageAdded, object: nil)
         }
         
         deinit {
             NotificationCenter.default.removeObserver(self)
         }
         
-        // MARK: -TOOD::
+        
         @objc func notifiAction(notification:NSNotification){
-                //TODO::
+                guard  let uid = notification.userInfo?[MessageItem.NotiKey] as? String else {
+                        return
+                }
+                
+                if uid != self.peerUid{
+                        return
+                }
+                
+                guard let msges = MessageItem.cache[self.peerUid!] else{
+                        return
+                }
+                
+                DispatchQueue.main.async {
+                        self.receiver.text = msges.toString()
+                }
         }
         
         private func populateView(){
@@ -52,13 +66,13 @@ extension MsgViewController:UITextViewDelegate{
         func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
                 
                 if (text == "\n"){
-                        textView.resignFirstResponder()
                         guard let msg = self.sender.text else{
                                 return false
                         }
-                        let cliMsg = CliMessage.init(to:peerUid!, data: msg.data(using: .utf8)!)
+                        let cliMsg = CliMessage.init(to:peerUid!, data: msg)
                         guard let err = WebsocketSrv.shared.SendIMMsg(cliMsg: cliMsg) else{
                                 textView.text = nil
+                                receiver.insertText(msg + "\r\n")
                                 return false
                         }
                         self.toastMessage(title: err.localizedDescription)

@@ -9,14 +9,15 @@ import Foundation
 import CoreData
 import SwiftyJSON
 
-typealias MessageList = Array<MessageItem>
+typealias MessageList = [MessageItem]
 
 class MessageItem: NSObject {
+        public static let NotiKey = "peerUid"
         var timeStamp:Int64 = 0
         var from:String?
         var to:String?
         var typ:CMT = .plainTxt
-        var payload:Data?
+        var payload:String?
         
         
         public static var cache:[String:MessageList] = [:]
@@ -46,7 +47,7 @@ class MessageItem: NSObject {
                 self.payload = cliMsg.data
         }
         
-        public static func addSentMessage(cliMsg:CliMessage){
+        public static func addSentIM(cliMsg:CliMessage){
                 
                 let sender = Wallet.shared.Addr!
                 let msg = MessageItem.init()
@@ -55,23 +56,27 @@ class MessageItem: NSObject {
                 msg.typ = cliMsg.type
                 msg.payload = cliMsg.data
                 
-                var list = cache[msg.to!]
-                if list == nil{
-                        list = Array.init()
+                if cache[msg.to!] == nil{
+                        cache[msg.to!] = []
                 }
-                list!.append(msg)
+                cache[msg.to!]!.append(msg)
         }
         
         public static func receivedIM(msg:MessageItem){
-                var list = cache[msg.to!]
-                if list == nil{
-                        list = Array.init()
+                if cache[msg.from!] == nil{
+                        cache[msg.from!] = []
                 }
-                list!.append(msg)
+                cache[msg.from!]!.append(msg)
+                cache[msg.from!]!.sort(by: { (a, b) -> Bool in
+                        return a.timeStamp < b.timeStamp
+                })
+                
+                NSLog("uid=\(msg.from!) size=\(cache[msg.from!]!.count)")
+                NotificationCenter.default.post(name:NotifyMessageAdded,
+                                                object: self, userInfo:[NotiKey:msg.from!])
         }
         
         public static func addUnread(_ msg:MessageItem){
-                
         }
 }
 
@@ -81,5 +86,27 @@ extension MessageItem:ModelObj{
         }
         
         func initByObj(obj: NSManagedObject) throws {
+        }
+}
+
+extension MessageList{
+        
+        func toString() -> String {
+                
+                var str = ""
+                for msg in self{
+                        switch msg.typ {
+                        case .plainTxt:
+                                str += msg.payload!
+                                str += "\r\n"
+                        case .contact://TODO::
+                                str += "Contact TODO::\r\n"
+                        case .voice://TODO::
+                                str += "Voice TODO::\r\n"
+                        case .location://TODO::
+                                str += "Location TODO::\r\n"
+                        }
+                }
+                return str
         }
 }

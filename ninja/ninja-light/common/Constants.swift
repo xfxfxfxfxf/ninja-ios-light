@@ -8,5 +8,5 @@
 import Foundation
 
 let NotifyContactChanged = NSNotification.Name(rawValue:"contact_new_changed")
-let NotifyMessageChanged = NSNotification.Name(rawValue:"messsage_content_changed")
+let NotifyMessageAdded = NSNotification.Name(rawValue:"messsage_content_added")
 let NotifyMsgSumChanged = NSNotification.Name(rawValue:"messsage_sum_changed")

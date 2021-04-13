@@ -29,8 +29,6 @@ class Wallet:NSObject{
                         }
                         
                         self.Copy(inst!)
-                        NSLog("\(self.Addr!)")
-                        NSLog("\(self.wJson!)")
                 } catch{
                         return false
                 }
