@@ -43,7 +43,6 @@ class ChatItem:NSObject{
                 if chat == nil{
                         chat = ChatItem.init()
                         chat!.ItemID = peerUid
-//                        chat!.ima = //TODO::
                         chat!.updateTime = time
                         CachedChats[peerUid] = chat
                         try? CDManager.shared.AddEntity(entity: "CDChatItem", m: chat!)

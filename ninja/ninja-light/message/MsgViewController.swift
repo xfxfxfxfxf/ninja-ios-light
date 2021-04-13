@@ -32,6 +32,10 @@ class MsgViewController: UIViewController {
             NotificationCenter.default.removeObserver(self)
         }
         
+        override func viewDidDisappear(_ animated: Bool) {
+                super.viewDidDisappear(animated)
+                ChatItem.CachedChats[peerUid!]?.resetUnread()
+        }
         
         @objc func notifiAction(notification:NSNotification){
                 guard  let uid = notification.userInfo?[MessageItem.NotiKey] as? String else {

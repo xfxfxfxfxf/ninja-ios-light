@@ -101,7 +101,7 @@ class MessageListViewController: UIViewController {
                                 return
                         }
                         
-                        let item = ChatItem.SortedArra()[idx]
+                        let item = sortedArray[idx]
                         item.resetUnread()
                         vc.peerUid = item.ItemID
                 }
