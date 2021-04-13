@@ -71,7 +71,6 @@ class MessageItem: NSObject {
                         return a.timeStamp < b.timeStamp
                 })
                 
-                NSLog("uid=\(msg.from!) size=\(cache[msg.from!]!.count)")
                 NotificationCenter.default.post(name:NotifyMessageAdded,
                                                 object: self, userInfo:[NotiKey:msg.from!])
         }

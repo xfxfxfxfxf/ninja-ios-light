@@ -123,15 +123,24 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yGk-yF-ohi">
+                                                    <rect key="frame" x="356" y="30.5" width="18" height="19.5"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                                    <color key="textColor" red="0.96862745100000003" green="0.66666666669999997" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="yGk-yF-ohi" firstAttribute="centerY" secondItem="Dck-AT-CJc" secondAttribute="centerY" id="202-ZQ-39a"/>
                                                 <constraint firstItem="P8L-mK-sgF" firstAttribute="leading" secondItem="Dck-AT-CJc" secondAttribute="leading" constant="10" id="CHK-kY-TVT"/>
                                                 <constraint firstItem="1YP-3u-iWH" firstAttribute="leading" secondItem="P8L-mK-sgF" secondAttribute="trailing" constant="12" id="DQW-Ih-2Be"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1YP-3u-iWH" secondAttribute="trailing" constant="20" symbolic="YES" id="GDd-oi-jIo"/>
                                                 <constraint firstItem="zrz-3G-5xv" firstAttribute="leading" secondItem="P8L-mK-sgF" secondAttribute="trailing" constant="12" id="HQ0-S6-CYx"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="yGk-yF-ohi" secondAttribute="trailing" constant="20" id="J36-Mw-052"/>
                                                 <constraint firstAttribute="bottom" secondItem="P8L-mK-sgF" secondAttribute="bottom" constant="10" id="TYg-YE-pbM"/>
                                                 <constraint firstItem="P8L-mK-sgF" firstAttribute="top" secondItem="Dck-AT-CJc" secondAttribute="top" constant="10" id="eJA-1T-bPg"/>
                                                 <constraint firstItem="zrz-3G-5xv" firstAttribute="top" secondItem="Dck-AT-CJc" secondAttribute="topMargin" constant="5" id="n9S-vA-QTI"/>
+                                                <constraint firstItem="yGk-yF-ohi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zrz-3G-5xv" secondAttribute="trailing" constant="8" symbolic="YES" id="xeF-tj-1TY"/>
                                                 <constraint firstItem="1YP-3u-iWH" firstAttribute="bottom" secondItem="Dck-AT-CJc" secondAttribute="bottomMargin" constant="-5" id="yT4-ZX-hLC"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zrz-3G-5xv" secondAttribute="trailing" constant="20" symbolic="YES" id="zhy-7S-KpY"/>
                                             </constraints>
@@ -140,6 +149,7 @@
                                             <outlet property="LastMsg" destination="1YP-3u-iWH" id="wHY-eh-uXM"/>
                                             <outlet property="avatarImg" destination="P8L-mK-sgF" id="deR-A1-etE"/>
                                             <outlet property="nickName" destination="zrz-3G-5xv" id="sI5-cb-dGL"/>
+                                            <outlet property="unread" destination="yGk-yF-ohi" id="pWl-I6-FyV"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -959,7 +969,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="b0X-Dq-dBX"/>
+        <segue reference="V9e-Ft-IOj"/>
         <segue reference="I7X-dG-gCK"/>
     </inferredMetricsTieBreakers>
     <resources>

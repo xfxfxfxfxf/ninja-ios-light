@@ -11,7 +11,7 @@ import CoreData
 class ChatItem:NSObject{
         
         public static var CachedChats:[String:ChatItem] = [:]
-        
+        var cObj:CDChatItem?
         var ItemID:String?
         var ImageData:Data?
         var NickName:String?
@@ -24,27 +24,49 @@ class ChatItem:NSObject{
         }
         
         public static func ReloadChatRoom(){
-        }
-        
-        public static func updateLastMsg(msg:CliMessage, time:Int64, unread no:Int){
-                var chat = CachedChats[msg.to!]
-                if chat == nil{
-                        chat = ChatItem.init()
-                        chat!.ItemID = msg.to
-//                        chat!.ima = //TODO::
-//                        chat!.NickName = //TODO::
-                          chat!.updateTime = time
-                }
-                if chat!.updateTime >= time{
+                var result:[ChatItem]?
+                let owner = Wallet.shared.Addr!
+                result = try? CDManager.shared.Get(entity: "CDChatItem",
+                                                   predicate: NSPredicate(format: "owner == %@", owner),
+                                                   sort: [["updateTime" : true]])
+                guard let data = result else {
                         return
                 }
                 
+                for obj in data{
+                        CachedChats[obj.ItemID!] = obj
+                }
+        }
+        
+        public static func updateLastMsg(peerUid:String, msg:String, time:Int64, unread no:Int){
+                var chat = CachedChats[peerUid]
+                if chat == nil{
+                        chat = ChatItem.init()
+                        chat!.ItemID = peerUid
+//                        chat!.ima = //TODO::
+                        
+                          chat!.updateTime = time
+                        CachedChats[peerUid] = chat
+                        try? CDManager.shared.AddEntity(entity: "CDChatItem", m: chat!)
+                }
+                
+                if chat!.NickName == nil{
+                        if let contact = ContactItem.cache[peerUid]{
+                                chat!.NickName = contact.nickName
+                        }
+                }
+                
+                if chat!.updateTime > time{
+                        return
+                }
                 
                 chat!.unreadNo += no
-                chat!.LastMsg = msg.coinvertToLastMsg()
+                chat!.LastMsg = msg
+                chat!.cObj?.unreadNo = Int32(chat!.unreadNo)
+                chat!.cObj?.lastMsg = chat!.LastMsg
                 
                 NotificationCenter.default.post(name:NotifyMsgSumChanged,
-                                                object: self, userInfo:["peerID":msg.to!])
+                                                object: self, userInfo:nil)
         }
         
         public static func updateAllLastMsg(msg:[String:CliMessage], time:[String:Int64], unread:[String:Int]){
@@ -64,12 +86,40 @@ class ChatItem:NSObject{
                 }
                 return sortedArray
         }
+        
+        func resetUnread(){
+                self.unreadNo = 0
+                self.cObj?.unreadNo = 0
+                NotificationCenter.default.post(name:NotifyMsgSumChanged,
+                                                object: self, userInfo:nil)
+        }
 }
+
 extension ChatItem:ModelObj{
         
         func fullFillObj(obj: NSManagedObject) throws {
+                guard let cObj = obj as? CDChatItem else {
+                        throw NJError.coreData("cast to chat item obj failed")
+                }
+                cObj.uid = self.ItemID
+                cObj.image = self.ImageData
+                cObj.nickName = self.NickName
+                cObj.lastMsg = self.LastMsg
+                cObj.updateTime = self.updateTime
+                cObj.unreadNo = Int32(self.unreadNo)
+                self.cObj = cObj
         }
         
         func initByObj(obj: NSManagedObject) throws {
+                guard let cObj = obj as? CDChatItem else {
+                        throw NJError.coreData("cast to chat item obj failed")
+                }
+                self.ItemID = cObj.uid
+                self.ImageData = cObj.image
+                self.NickName = cObj.nickName
+                self.LastMsg = cObj.lastMsg
+                self.updateTime = cObj.updateTime
+                self.unreadNo = Int(cObj.unreadNo)
+                self.cObj = cObj
         }
 }

@@ -18,5 +18,6 @@ class ServiceDelegate: NSObject {
         public static func InitService(){
                 //TODO:: more system configs
                 IosLib.IosLibConfigApp("", WebsocketSrv.shared)
+                ContactItem.LocalSavedContact()
         }
 }

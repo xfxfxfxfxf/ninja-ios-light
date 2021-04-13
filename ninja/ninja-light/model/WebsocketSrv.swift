@@ -46,7 +46,10 @@ class WebsocketSrv:NSObject{
                 }
                 
                 MessageItem.addSentIM(cliMsg: cliMsg)
-                ChatItem.updateLastMsg(msg: cliMsg, time: Int64(Date().timeIntervalSince1970), unread: 0)
+                ChatItem.updateLastMsg(peerUid: cliMsg.to!,
+                                       msg: cliMsg.coinvertToLastMsg(),
+                                       time: Int64(Date().timeIntervalSince1970),
+                                       unread: 0)
                 return nil
         }
 }
@@ -65,7 +68,10 @@ extension WebsocketSrv:IosLibAppCallBackProtocol{
                 
                 
                 MessageItem.receivedIM(msg: msg)
-                ChatItem.updateLastMsg(msg: cliMsg, time: time, unread: 1)
+                ChatItem.updateLastMsg(peerUid:from!,
+                                       msg: cliMsg.coinvertToLastMsg(),
+                                       time: time,
+                                       unread: 1)
         }
         
         func unreadMsg(_ jsonData: Data?) throws {

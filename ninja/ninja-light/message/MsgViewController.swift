@@ -21,6 +21,11 @@ class MsgViewController: UIViewController {
                 self.populateView()
                 NotificationCenter.default.addObserver(self, selector:#selector(notifiAction(notification:)),
                                                                name: NotifyMessageAdded, object: nil)
+                
+                guard let msges = MessageItem.cache[self.peerUid!] else{
+                        return
+                }
+                self.receiver.text = msges.toString()
         }
         
         deinit {

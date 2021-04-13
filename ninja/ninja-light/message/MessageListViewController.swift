@@ -20,18 +20,33 @@ class MessageListViewController: UIViewController {
                 tableView.rowHeight = 80
                 refreshControl.addTarget(self, action: #selector(self.reloadChatRoom(_:)), for: .valueChanged)
                 tableView.addSubview(refreshControl)
+                self.reloadChatRoom(nil)
+                
+                
+                NotificationCenter.default.addObserver(self, selector:#selector(notifiAction(notification:)),
+                                                               name: NotifyMsgSumChanged, object: nil)
         }
+        
+        deinit {
+                NotificationCenter.default.removeObserver(self)
+        }
+        
+        @objc func notifiAction(notification:NSNotification){
+                DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                }
+        }
+        
         //MARK: - object c
         @objc func reloadChatRoom(_ sender: Any?){
               //TODO::fetch unread message
-                
-//                ServiceDelegate.workQueue.async {
-//                        ChatItem.ReloadChatRoom()
+                ServiceDelegate.workQueue.async {
+                        ChatItem.ReloadChatRoom()
                         DispatchQueue.main.async {
                                 self.refreshControl.endRefreshing()
                                 self.tableView.reloadData()
                         }
-//                }
+                }
         }
         
         override func viewWillAppear(_ animated: Bool) {
@@ -83,6 +98,7 @@ class MessageListViewController: UIViewController {
                         }
                         
                         let item = ChatItem.SortedArra()[idx]
+                        item.resetUnread()
                         vc.peerUid = item.ItemID
                 }
                 
@@ -91,6 +107,7 @@ class MessageListViewController: UIViewController {
 
 // MARK: - tableview
 extension MessageListViewController: UITableViewDelegate ,  UITableViewDataSource {
+        
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
                 return ChatItem.CachedChats.count
         }
@@ -105,6 +122,7 @@ extension MessageListViewController: UITableViewDelegate ,  UITableViewDataSourc
                 }
                 return cell
         }
+        
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
                 self.SelectedRowID = indexPath.row
                 self.performSegue(withIdentifier: "ShowMessageDetailsSEG", sender: self)
