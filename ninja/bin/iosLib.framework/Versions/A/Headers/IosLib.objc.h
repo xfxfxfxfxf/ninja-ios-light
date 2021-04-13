@@ -29,6 +29,7 @@
 - (nonnull instancetype)init;
 // skipped method IosApp.ImmediateMessage with unsupported parameter or return types
 
+- (void)onlineSuccess;
 // skipped method IosApp.UnreadMsg with unsupported parameter or return types
 
 - (void)webSocketClosed;
@@ -43,6 +44,8 @@ FOUNDATION_EXPORT void IosLibConfigApp(NSString* _Nullable addr, id<IosLibAppCal
 FOUNDATION_EXPORT BOOL IosLibIsValidNinjaAddr(NSString* _Nullable addr);
 
 FOUNDATION_EXPORT NSString* _Nonnull IosLibNewWallet(NSString* _Nullable auth);
+
+FOUNDATION_EXPORT NSData* _Nullable IosLibUnmarshalGoByte(NSString* _Nullable s);
 
 FOUNDATION_EXPORT BOOL IosLibWSIsOnline(void);
 

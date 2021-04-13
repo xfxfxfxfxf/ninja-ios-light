@@ -66,8 +66,17 @@ class ChatItem:NSObject{
                                                 object: self, userInfo:nil)
         }
         
-        public static func updateAllLastMsg(msg:[String:CliMessage], time:[String:Int64], unread:[String:Int]){
+        public static func updateAllLastMsg(msg:[String:ChatItem])throws {
                 
+                let array = Array(msg.values)
+                guard array.count > 0 else {
+                        return
+                }
+                
+                try CDManager.shared.AddBatch(entity: "CDChatItem", m: array)
+                
+                NotificationCenter.default.post(name:NotifyMsgSumChanged,
+                                                object: self, userInfo:nil)
         }
         
         public static func SortedArra() -> [ChatItem]{
@@ -120,10 +129,16 @@ extension ChatItem:ModelObj{
                 guard let cObj = obj as? CDChatItem else {
                         throw NJError.coreData("cast to chat item obj failed")
                 }
+                
                 self.ItemID = cObj.uid
                 self.LastMsg = cObj.lastMsg
                 self.updateTime = cObj.updateTime
                 self.unreadNo = Int(cObj.unreadNo)
                 self.cObj = cObj
+                
+                if let contact = ContactItem.cache[self.ItemID!]{
+                        self.NickName = contact.nickName
+                        self.ImageData = contact.avatar
+                }
         }
 }

@@ -8,6 +8,7 @@
 import Foundation
 import CoreData
 import SwiftyJSON
+import IosLib
 
 typealias MessageList = [MessageItem]
 
@@ -24,18 +25,29 @@ class MessageItem: NSObject {
         override init() {
                 super.init()
         }
+        func coinvertToLastMsg() -> String{
+                switch self.typ {
+                case .plainTxt:
+                        return String(self.payload!.prefix(20))
+                case .voice:
+                        return "[Voice Message]"
+                case .location:
+                        return "[Location]"
+                case .contact:
+                        return "[Contact]"
+                }
+        }
         
-        static func InitWith(json:JSON) -> (MessageItem, CliMessage?){
-                let msg = MessageItem.init()
-                msg.from = json["From"].string
-                msg.to = json["To"].string
-                msg.timeStamp = json["UnixTime"].int64 ?? 0
-                let data = json["PayLoad"].object as? Data
-                let cliMsg = try? CliMessage.FromNinjaPayload(data!, to: msg.to!)
-                msg.typ = cliMsg!.type
-                msg.payload = cliMsg?.data
-                
-                return (msg, cliMsg)
+        init(json:JSON){
+                self.from = json["From"].string
+                self.to = json["To"].string
+                self.timeStamp = json["UnixTime"].int64 ?? 0
+                let payStr = json["PayLoad"].string
+                if let data = IosLib.IosLibUnmarshalGoByte(payStr){
+                        let cliMsg = try? CliMessage.FromNinjaPayload(data, to: self.to!)
+                        self.typ = cliMsg!.type
+                        self.payload = cliMsg?.data
+                }
         }
         
         init(cliMsg:CliMessage, from: String, time: Int64){
@@ -47,7 +59,7 @@ class MessageItem: NSObject {
                 self.payload = cliMsg.data
         }
         
-        public static func addSentIM(cliMsg:CliMessage){
+        public static func addSentIM(cliMsg:CliMessage)->MessageItem{
                 
                 let sender = Wallet.shared.Addr!
                 let msg = MessageItem.init()
@@ -60,6 +72,7 @@ class MessageItem: NSObject {
                         cache[msg.to!] = []
                 }
                 cache[msg.to!]!.append(msg)
+                return msg
         }
         
         public static func receivedIM(msg:MessageItem){
@@ -75,7 +88,8 @@ class MessageItem: NSObject {
                                                 object: self, userInfo:[NotiKey:msg.from!])
         }
         
-        public static func addUnread(_ msg:MessageItem){
+        public static func saveUnread(_ msg:[MessageItem])throws {
+                try CDManager.shared.AddBatch(entity: "CDUnread", m: msg)
         }
 }
 

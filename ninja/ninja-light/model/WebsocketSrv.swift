@@ -45,9 +45,9 @@ class WebsocketSrv:NSObject{
                         return NJError.msg(error!.localizedDescription)
                 }
                 
-                MessageItem.addSentIM(cliMsg: cliMsg)
+                let msg = MessageItem.addSentIM(cliMsg: cliMsg)
                 ChatItem.updateLastMsg(peerUid: cliMsg.to!,
-                                       msg: cliMsg.coinvertToLastMsg(),
+                                       msg: msg.coinvertToLastMsg(),
                                        time: Int64(Date().timeIntervalSince1970),
                                        unread: 0)
                 return nil
@@ -69,7 +69,7 @@ extension WebsocketSrv:IosLibAppCallBackProtocol{
                 
                 MessageItem.receivedIM(msg: msg)
                 ChatItem.updateLastMsg(peerUid:from!,
-                                       msg: cliMsg.coinvertToLastMsg(),
+                                       msg: msg.coinvertToLastMsg(),
                                        time: time,
                                        unread: 1)
         }
@@ -79,29 +79,28 @@ extension WebsocketSrv:IosLibAppCallBackProtocol{
                         return
                 }
                 
+                var unreadItem:[String:ChatItem] = [:]
                 let json = try JSON(data: data)
-                let receiver = json["receiver"].string
-                let owner = Wallet.shared.Addr!
-                if receiver != owner{
-                        throw NJError.msg("this unread is not for me")
-                }
+                var unreadMsg:[MessageItem] = []
                 
-                var lastCliMsg:[String:CliMessage] = [:]
-                var lastTime:[String:Int64] = [:]
-                var unreadNo:[String:Int] = [:]
-                
-                for (_,subJson):(String, JSON) in json["payload"]{
-                        let (msg, cliMsg) = MessageItem.InitWith(json:subJson)
-                        MessageItem.addUnread(msg)
-                        let to = msg.to!
-                        if lastTime[to] ?? 0 < msg.timeStamp{
-                                lastCliMsg[to] = cliMsg
-                                lastTime[to] = msg.timeStamp
+                for (_,subJson):(String, JSON) in json{
+                        let msg = MessageItem.init(json:subJson)
+                        unreadMsg.append(msg)
+                        let from = msg.from!
+                        if unreadItem[from] == nil{
+                                unreadItem[from] = ChatItem.init()
+                                unreadItem[from]?.ItemID = from
                         }
-                        unreadNo[to] = unreadNo[to] ?? 0 + 1
+                        
+                        if  unreadItem[from]!.updateTime < msg.timeStamp{
+                                unreadItem[from]?.updateTime = msg.timeStamp
+                                unreadItem[from]?.LastMsg = msg.coinvertToLastMsg()
+                                unreadItem[from]?.unreadNo += 1
+                        }
                 }
                 
-                ChatItem.updateAllLastMsg(msg: lastCliMsg, time: lastTime, unread: unreadNo)
+                try MessageItem.saveUnread(unreadMsg)
+                try ChatItem.updateAllLastMsg(msg: unreadItem)
         }
         
         func webSocketClosed() {

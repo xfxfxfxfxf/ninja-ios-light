@@ -37,7 +37,7 @@ class CliMessage: NSObject {
                 return try jObj.rawData()
         }
         
-        static func  FromNinjaPayload(_ data:Data, to:String)throws -> CliMessage{
+        static func FromNinjaPayload(_ data:Data, to:String)throws -> CliMessage{
                 let cliMsg = CliMessage.init()
                 
                 let json = try JSON(data: data)
@@ -46,18 +46,5 @@ class CliMessage: NSObject {
                 cliMsg.to = to
                 
                 return cliMsg
-        }
-        
-        func coinvertToLastMsg() -> String{
-                switch self.type {
-                case .plainTxt:
-                        return String(self.data!.prefix(20))
-                case .voice:
-                        return "[Voice Message]"
-                case .location:
-                        return "[Location]"
-                case .contact:
-                        return "[Contact]"
-                }
         }
 }

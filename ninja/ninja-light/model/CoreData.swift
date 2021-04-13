@@ -132,6 +132,21 @@ extension CDManager{
                 try managedContext.save()
         }
         
+        func AddBatch<T>(entity:String, m:[T])throws where T: ModelObj{
+                
+                let managedContext = persistentContainer.viewContext
+                let entity = NSEntityDescription.entity(forEntityName: entity,
+                                               in: managedContext)!
+                  
+                let object = NSManagedObject(entity: entity,
+                                             insertInto: managedContext)
+                for mObj in m{
+                        try mObj.fullFillObj(obj: object)
+                }
+                
+                try managedContext.save()
+        }
+        
         func AddEntity<T>(entity:String, m:T)throws where T: ModelObj{
                 let managedContext = persistentContainer.viewContext
                   
