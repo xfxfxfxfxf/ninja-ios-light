@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20E5229a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CDChatItem" representedClassName="CDChatItem" syncable="YES" codeGenerationType="class">
-        <attribute name="image" optional="YES" attributeType="Binary"/>
         <attribute name="lastMsg" optional="YES" attributeType="String"/>
-        <attribute name="nickName" optional="YES" attributeType="String"/>
         <attribute name="owner" optional="YES" attributeType="String"/>
         <attribute name="uid" optional="YES" attributeType="String"/>
         <attribute name="unreadNo" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
@@ -28,7 +26,7 @@
         <attribute name="jsonStr" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="CDChatItem" positionX="-45" positionY="27" width="128" height="134"/>
+        <element name="CDChatItem" positionX="-45" positionY="27" width="128" height="104"/>
         <element name="CDContact" positionX="-36" positionY="18" width="128" height="104"/>
         <element name="CDUnread" positionX="-54" positionY="9" width="128" height="104"/>
         <element name="CDWallet" positionX="-63" positionY="-18" width="128" height="59"/>

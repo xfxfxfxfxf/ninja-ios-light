@@ -44,16 +44,14 @@ class ChatItem:NSObject{
                         chat = ChatItem.init()
                         chat!.ItemID = peerUid
 //                        chat!.ima = //TODO::
-                        
-                          chat!.updateTime = time
+                        chat!.updateTime = time
                         CachedChats[peerUid] = chat
                         try? CDManager.shared.AddEntity(entity: "CDChatItem", m: chat!)
                 }
                 
-                if chat!.NickName == nil{
-                        if let contact = ContactItem.cache[peerUid]{
-                                chat!.NickName = contact.nickName
-                        }
+                if let contact = ContactItem.cache[peerUid]{
+                        chat!.NickName = contact.nickName
+                        chat!.ImageData = contact.avatar
                 }
                 
                 if chat!.updateTime > time{
@@ -73,11 +71,13 @@ class ChatItem:NSObject{
                 
         }
         
-        public static func SortedArra() ->[ChatItem]{
+        public static func SortedArra() -> [ChatItem]{
                 var sortedArray:[ChatItem] = []
+                
                 guard CachedChats.count > 0 else {
                         return sortedArray
                 }
+                
                 for (_, item) in CachedChats{
                         sortedArray.append(item)
                 }
@@ -93,6 +93,12 @@ class ChatItem:NSObject{
                 NotificationCenter.default.post(name:NotifyMsgSumChanged,
                                                 object: self, userInfo:nil)
         }
+        
+        public static func remove(_ uid:String){
+                let owner = Wallet.shared.Addr!
+                try? CDManager.shared.Delete(entity: "CDChatItem",
+                                        predicate: NSPredicate(format: "owner == %@ AND uid == %@", owner, uid))
+        }
 }
 
 extension ChatItem:ModelObj{
@@ -101,9 +107,10 @@ extension ChatItem:ModelObj{
                 guard let cObj = obj as? CDChatItem else {
                         throw NJError.coreData("cast to chat item obj failed")
                 }
+                
+                let owner = Wallet.shared.Addr!
+                cObj.owner = owner
                 cObj.uid = self.ItemID
-                cObj.image = self.ImageData
-                cObj.nickName = self.NickName
                 cObj.lastMsg = self.LastMsg
                 cObj.updateTime = self.updateTime
                 cObj.unreadNo = Int32(self.unreadNo)
@@ -115,8 +122,6 @@ extension ChatItem:ModelObj{
                         throw NJError.coreData("cast to chat item obj failed")
                 }
                 self.ItemID = cObj.uid
-                self.ImageData = cObj.image
-                self.NickName = cObj.nickName
                 self.LastMsg = cObj.lastMsg
                 self.updateTime = cObj.updateTime
                 self.unreadNo = Int(cObj.unreadNo)

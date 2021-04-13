@@ -99,11 +99,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P8L-mK-sgF">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="x_icon" translatesAutoresizingMaskIntoConstraints="NO" id="P8L-mK-sgF">
                                                     <rect key="frame" x="10" y="10" width="60" height="60"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="60" id="Oqg-A4-JOe"/>
-                                                        <constraint firstAttribute="height" constant="60" id="ka9-OP-ASn"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="Oqg-A4-JOe"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="ka9-OP-ASn"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -137,10 +137,9 @@
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1YP-3u-iWH" secondAttribute="trailing" constant="20" symbolic="YES" id="GDd-oi-jIo"/>
                                                 <constraint firstItem="zrz-3G-5xv" firstAttribute="leading" secondItem="P8L-mK-sgF" secondAttribute="trailing" constant="12" id="HQ0-S6-CYx"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="yGk-yF-ohi" secondAttribute="trailing" constant="20" id="J36-Mw-052"/>
-                                                <constraint firstAttribute="bottom" secondItem="P8L-mK-sgF" secondAttribute="bottom" constant="10" id="TYg-YE-pbM"/>
-                                                <constraint firstItem="P8L-mK-sgF" firstAttribute="top" secondItem="Dck-AT-CJc" secondAttribute="top" constant="10" id="eJA-1T-bPg"/>
+                                                <constraint firstItem="P8L-mK-sgF" firstAttribute="centerY" secondItem="Dck-AT-CJc" secondAttribute="centerY" id="caK-L8-1UV"/>
                                                 <constraint firstItem="zrz-3G-5xv" firstAttribute="top" secondItem="Dck-AT-CJc" secondAttribute="topMargin" constant="5" id="n9S-vA-QTI"/>
-                                                <constraint firstItem="yGk-yF-ohi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zrz-3G-5xv" secondAttribute="trailing" constant="8" symbolic="YES" id="xeF-tj-1TY"/>
+                                                <constraint firstItem="yGk-yF-ohi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zrz-3G-5xv" secondAttribute="trailing" priority="100" constant="8" symbolic="YES" id="xeF-tj-1TY"/>
                                                 <constraint firstItem="1YP-3u-iWH" firstAttribute="bottom" secondItem="Dck-AT-CJc" secondAttribute="bottomMargin" constant="-5" id="yT4-ZX-hLC"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zrz-3G-5xv" secondAttribute="trailing" constant="20" symbolic="YES" id="zhy-7S-KpY"/>
                                             </constraints>
