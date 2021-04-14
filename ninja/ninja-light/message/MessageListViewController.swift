@@ -73,7 +73,6 @@ class MessageListViewController: UIViewController {
                         guard let err = WebsocketSrv.shared.Online() else{
                                 return
                         }
-                        NSLog("\(err.localizedDescription)")
                         showErrorTips(err: err)
                         return
                 }
@@ -105,7 +104,7 @@ class MessageListViewController: UIViewController {
                         
                         let item = sortedArray[idx]
                         item.resetUnread()
-                        vc.peerUid = item.ItemID
+                        vc.peerUid = item.ItemID!
                 }
         }
 }

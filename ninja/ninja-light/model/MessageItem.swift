@@ -13,22 +13,60 @@ import IosLib
 typealias MessageList = [MessageItem]
 
 class MessageItem: NSObject {
+        
         public static let NotiKey = "peerUid"
         var timeStamp:Int64 = 0
         var from:String?
         var to:String?
         var typ:CMT = .plainTxt
         var payload:String?
-        
+        var isOut:Bool = false
         
         public static var cache:[String:MessageList] = [:]
         override init() {
                 super.init()
         }
+        
+        public static func loadUnread(){
+                
+                let owner = Wallet.shared.Addr!
+                var result:[MessageItem]?
+                result = try? CDManager.shared.Get(entity: "CDUnread",
+                                                   predicate: NSPredicate(format: "owner == %@", owner))
+                guard let data = result else{
+                        return
+                }
+                
+                for msg in data{
+                        
+                        var peerUid:String
+                        if msg.isOut{
+                                peerUid = msg.to!
+                        }else{
+                                peerUid = msg.from!
+                        }
+                        
+                        if cache[peerUid] == nil{
+                                cache[peerUid] = MessageList.init()
+                        }
+                        
+                        cache[peerUid]?.append(msg)
+                }
+        }
+        
+        public static func removeRead(_ uid:String){
+                cache.removeValue(forKey: uid)
+                let owner = Wallet.shared.Addr!
+                try? CDManager.shared.Delete(entity: "CDUnread",
+                                        predicate: NSPredicate(format: "owner == %@ AND (from == %@ OR to == %@)",
+                                                               owner, uid, uid))
+        }
+        
         func coinvertToLastMsg() -> String{
                 switch self.typ {
                 case .plainTxt:
-                        return String(self.payload!.prefix(20))
+                        let time = Date.init(timeIntervalSince1970: TimeInterval(self.timeStamp))
+                        return dateFormatterGet.string(from: time)
                 case .voice:
                         return "[Voice Message]"
                 case .location:
@@ -38,10 +76,13 @@ class MessageItem: NSObject {
                 }
         }
         
-        init(json:JSON){
+        init(json:JSON, out:Bool){
+                
                 self.from = json["From"].string
                 self.to = json["To"].string
                 self.timeStamp = json["UnixTime"].int64 ?? 0
+                self.isOut = out
+                
                 let payStr = json["PayLoad"].string
                 if let data = IosLib.IosLibUnmarshalGoByte(payStr){
                         let cliMsg = try? CliMessage.FromNinjaPayload(data, to: self.to!)
@@ -50,13 +91,14 @@ class MessageItem: NSObject {
                 }
         }
         
-        init(cliMsg:CliMessage, from: String, time: Int64){
+        init(cliMsg:CliMessage, from: String, time: Int64, out:Bool){
                 super.init()
                 self.from = from
                 self.timeStamp = time
                 self.to = cliMsg.to
                 self.typ = cliMsg.type
                 self.payload = cliMsg.data
+                self.isOut = out
         }
         
         public static func addSentIM(cliMsg:CliMessage)->MessageItem{
@@ -67,11 +109,14 @@ class MessageItem: NSObject {
                 msg.to = cliMsg.to
                 msg.typ = cliMsg.type
                 msg.payload = cliMsg.data
-                
+                msg.timeStamp = Int64(NSDate().timeIntervalSince1970)
+                msg.isOut = true
                 if cache[msg.to!] == nil{
                         cache[msg.to!] = []
                 }
                 cache[msg.to!]!.append(msg)
+                
+                try? CDManager.shared.AddEntity(entity: "CDUnread", m: msg)
                 return msg
         }
         
@@ -83,7 +128,7 @@ class MessageItem: NSObject {
                 cache[msg.from!]!.sort(by: { (a, b) -> Bool in
                         return a.timeStamp < b.timeStamp
                 })
-                
+                try? CDManager.shared.AddEntity(entity: "CDUnread", m: msg)
                 NotificationCenter.default.post(name:NotifyMessageAdded,
                                                 object: self, userInfo:[NotiKey:msg.from!])
         }
@@ -96,9 +141,27 @@ class MessageItem: NSObject {
 extension MessageItem:ModelObj{
         
         func fullFillObj(obj: NSManagedObject) throws {
+                guard let uObj = obj as? CDUnread else {
+                        throw NJError.coreData("cast to unread item obj failed")
+                }
+                let owner = Wallet.shared.Addr!
+                uObj.from = self.from
+                uObj.isOut = self.isOut
+                uObj.message = self.payload
+                uObj.owner = owner
+                uObj.to = self.to
+                uObj.unixTime = self.timeStamp
         }
         
         func initByObj(obj: NSManagedObject) throws {
+                guard let uObj = obj as? CDUnread else {
+                        throw NJError.coreData("cast to unread item obj failed")
+                }
+                self.from = uObj.from
+                self.isOut = uObj.isOut
+                self.payload = uObj.message
+                self.to = uObj.to
+                self.timeStamp = uObj.unixTime
         }
 }
 
@@ -110,8 +173,10 @@ extension MessageList{
                 for msg in self{
                         switch msg.typ {
                         case .plainTxt:
-                                str += msg.payload!
-                                str += "\r\n"
+                                if msg.isOut{
+                                        str += "--->:"
+                                }
+                                str += "\(msg.payload!)\r\n"
                         case .contact://TODO::
                                 str += "Contact TODO::\r\n"
                         case .voice://TODO::

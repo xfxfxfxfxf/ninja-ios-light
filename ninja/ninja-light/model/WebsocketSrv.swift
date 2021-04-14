@@ -64,8 +64,7 @@ extension WebsocketSrv:IosLibAppCallBackProtocol{
                 }
                 
                 let cliMsg = try CliMessage.FromNinjaPayload(payload!, to: to!)
-                let msg = MessageItem.init(cliMsg:cliMsg, from:from!, time:time)
-                
+                let msg = MessageItem.init(cliMsg:cliMsg, from:from!, time:time, out:false)
                 
                 MessageItem.receivedIM(msg: msg)
                 ChatItem.updateLastMsg(peerUid:from!,
@@ -84,7 +83,7 @@ extension WebsocketSrv:IosLibAppCallBackProtocol{
                 var unreadMsg:[MessageItem] = []
                 
                 for (_,subJson):(String, JSON) in json{
-                        let msg = MessageItem.init(json:subJson)
+                        let msg = MessageItem.init(json:subJson, out:false)
                         unreadMsg.append(msg)
                         let from = msg.from!
                         if unreadItem[from] == nil{

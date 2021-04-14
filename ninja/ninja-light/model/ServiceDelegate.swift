@@ -19,5 +19,7 @@ class ServiceDelegate: NSObject {
                 //TODO:: more system configs
                 IosLib.IosLibConfigApp("", WebsocketSrv.shared)
                 ContactItem.LocalSavedContact()
+                MessageItem.loadUnread()
+                dateFormatterGet.timeStyle = .medium
         }
 }

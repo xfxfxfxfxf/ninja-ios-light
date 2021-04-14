@@ -28,8 +28,10 @@ class NewWalletViewController: UIViewController {
                 }
                 
                 do {
-                        
                         try Wallet.shared.New(password)
+                        ServiceDelegate.InitService()
+                        _ = Wallet.shared.Active(password)
+                        
                         if #available(iOS 13.0, *) {
                                 let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as! SceneDelegate
                                 sceneDelegate.window!.rootViewController =  instantiateViewController(vcID: "NinjaHomeTabVC")

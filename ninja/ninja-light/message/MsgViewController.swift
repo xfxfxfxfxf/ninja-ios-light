@@ -12,7 +12,7 @@ class MsgViewController: UIViewController {
         @IBOutlet weak var sender: UITextView!
         @IBOutlet weak var receiver: UITextView!
         @IBOutlet weak var peerNickName: UINavigationItem!
-        var peerUid:String?
+        var peerUid:String = ""
         var contactData:ContactItem?
         
         override func viewDidLoad() {
@@ -28,7 +28,7 @@ class MsgViewController: UIViewController {
                                                        selector:#selector(contactUpdate(notification:)),
                                                        name: NotifyContactChanged,
                                                        object: nil)
-                guard let msges = MessageItem.cache[self.peerUid!] else{
+                guard let msges = MessageItem.cache[self.peerUid] else{
                         return
                 }
                 self.receiver.text = msges.toString()
@@ -40,11 +40,14 @@ class MsgViewController: UIViewController {
         
         override func viewDidDisappear(_ animated: Bool) {
                 super.viewDidDisappear(animated)
-                ChatItem.CachedChats[peerUid!]?.resetUnread()
+                ServiceDelegate.workQueue.async {
+                        ChatItem.CachedChats[self.peerUid]?.resetUnread()
+                        MessageItem.removeRead(self.peerUid)
+                }
         }
         
         @objc func contactUpdate(notification:NSNotification){
-                contactData = ContactItem.cache[peerUid!]
+                contactData = ContactItem.cache[peerUid]
                 DispatchQueue.main.async {
                         self.peerNickName.title = self.contactData?.nickName ?? self.peerUid
                 }
@@ -58,7 +61,7 @@ class MsgViewController: UIViewController {
                         return
                 }
                 
-                guard let msges = MessageItem.cache[self.peerUid!] else{
+                guard let msges = MessageItem.cache[self.peerUid] else{
                         return
                 }
                 
@@ -71,11 +74,7 @@ class MsgViewController: UIViewController {
         }
         
         private func populateView(){
-                guard let uid = peerUid else {
-                        return
-                }
-                
-                contactData = ContactItem.cache[uid]
+                contactData = ContactItem.cache[peerUid]
                 self.peerNickName.title = contactData?.nickName ?? peerUid
         }
     
@@ -96,7 +95,7 @@ extension MsgViewController:UITextViewDelegate{
                         guard let msg = self.sender.text else{
                                 return false
                         }
-                        let cliMsg = CliMessage.init(to:peerUid!, data: msg)
+                        let cliMsg = CliMessage.init(to:peerUid, data: msg)
                         guard let err = WebsocketSrv.shared.SendIMMsg(cliMsg: cliMsg) else{
                                 textView.text = nil
                                 receiver.insertText(msg + "\r\n")

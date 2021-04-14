@@ -16,7 +16,8 @@
     </entity>
     <entity name="CDUnread" representedClassName="CDUnread" syncable="YES" codeGenerationType="class">
         <attribute name="from" optional="YES" attributeType="String"/>
-        <attribute name="message" optional="YES" attributeType="Binary"/>
+        <attribute name="isOut" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="message" optional="YES" attributeType="String"/>
         <attribute name="owner" optional="YES" attributeType="String"/>
         <attribute name="to" optional="YES" attributeType="String"/>
         <attribute name="unixTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -28,7 +29,7 @@
     <elements>
         <element name="CDChatItem" positionX="-45" positionY="27" width="128" height="104"/>
         <element name="CDContact" positionX="-36" positionY="18" width="128" height="104"/>
-        <element name="CDUnread" positionX="-54" positionY="9" width="128" height="104"/>
+        <element name="CDUnread" positionX="-54" positionY="9" width="128" height="119"/>
         <element name="CDWallet" positionX="-63" positionY="-18" width="128" height="59"/>
     </elements>
 </model>
