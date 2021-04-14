@@ -96,6 +96,10 @@ class ChatItem:NSObject{
         }
         
         func resetUnread(){
+                guard self.unreadNo != 0 else {
+                        return
+                }
+                
                 self.unreadNo = 0
                 self.cObj?.unreadNo = 0
                 NotificationCenter.default.post(name:NotifyMsgSumChanged,

@@ -28,6 +28,9 @@ class ContactItem:NSObject{
                 obj = try? CDManager.shared.GetOne(entity: "CDContact",
                                                    predicate:NSPredicate(format: "uid == %@ AND owner == %@",
                                                                          uid, owner))
+                if obj != nil{
+                        cache[obj!.uid!] = obj
+                }
                 return obj
         }
         
@@ -41,6 +44,7 @@ class ContactItem:NSObject{
                                                                                    contact.owner!)
                         )
                         
+                        cache[contact.uid!] = contact
                 }catch let err{
                         return NJError.contact(err.localizedDescription)
                 }
@@ -55,7 +59,7 @@ class ContactItem:NSObject{
                                                                                    uid,
                                                                                    owner)
                         )
-                        
+                        cache.removeValue(forKey: uid)
                 }catch let err{
                         return NJError.contact(err.localizedDescription)
                 }

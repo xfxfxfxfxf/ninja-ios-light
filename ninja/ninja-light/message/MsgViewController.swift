@@ -19,9 +19,15 @@ class MsgViewController: UIViewController {
                 super.viewDidLoad()
                 self.hideKeyboardWhenTappedAround()
                 self.populateView()
-                NotificationCenter.default.addObserver(self, selector:#selector(notifiAction(notification:)),
-                                                               name: NotifyMessageAdded, object: nil)
+                NotificationCenter.default.addObserver(self,
+                                                       selector:#selector(newMsg(notification:)),
+                                                       name: NotifyMessageAdded,
+                                                       object: nil)
                 
+                NotificationCenter.default.addObserver(self,
+                                                       selector:#selector(contactUpdate(notification:)),
+                                                       name: NotifyContactChanged,
+                                                       object: nil)
                 guard let msges = MessageItem.cache[self.peerUid!] else{
                         return
                 }
@@ -37,7 +43,13 @@ class MsgViewController: UIViewController {
                 ChatItem.CachedChats[peerUid!]?.resetUnread()
         }
         
-        @objc func notifiAction(notification:NSNotification){
+        @objc func contactUpdate(notification:NSNotification){
+                contactData = ContactItem.cache[peerUid!]
+                DispatchQueue.main.async {
+                        self.peerNickName.title = self.contactData?.nickName ?? self.peerUid
+                }
+        }
+        @objc func newMsg(notification:NSNotification){
                 guard  let uid = notification.userInfo?[MessageItem.NotiKey] as? String else {
                         return
                 }
@@ -54,6 +66,9 @@ class MsgViewController: UIViewController {
                         self.receiver.text = msges.toString()
                 }
         }
+        @IBAction func EditContactInfo(_ sender: UIBarButtonItem) {
+                self.performSegue(withIdentifier: "EditContactDetailsSEG", sender: self)
+        }
         
         private func populateView(){
                 guard let uid = peerUid else {
@@ -61,13 +76,16 @@ class MsgViewController: UIViewController {
                 }
                 
                 contactData = ContactItem.cache[uid]
-                self.peerNickName.title = contactData?.nickName
+                self.peerNickName.title = contactData?.nickName ?? peerUid
         }
     
         // MARK: - Navigation
         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+                if segue.identifier == "EditContactDetailsSEG"{
+                        let vc : ContactDetailsViewController = segue.destination as! ContactDetailsViewController
+                        vc.itemUID = peerUid
+                }
         }
-    
 }
 
 extension MsgViewController:UITextViewDelegate{

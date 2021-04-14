@@ -25,8 +25,10 @@ class MessageListViewController: UIViewController {
                 self.reloadChatRoom(nil)
                 
                 
-                NotificationCenter.default.addObserver(self, selector:#selector(notifiAction(notification:)),
-                                                               name: NotifyMsgSumChanged, object: nil)
+                NotificationCenter.default.addObserver(self,
+                                                       selector:#selector(notifiAction(notification:)),
+                                                       name: NotifyMsgSumChanged,
+                                                       object: nil)
         }
         
         deinit {
@@ -34,8 +36,8 @@ class MessageListViewController: UIViewController {
         }
         
         @objc func notifiAction(notification:NSNotification){
+                self.sortedArray = ChatItem.SortedArra()
                 DispatchQueue.main.async {
-                        self.sortedArray = ChatItem.SortedArra()
                         self.tableView.reloadData()
                 }
         }
