@@ -98,7 +98,7 @@ extension MsgViewController:UITextViewDelegate{
                         let cliMsg = CliMessage.init(to:peerUid, data: msg)
                         guard let err = WebsocketSrv.shared.SendIMMsg(cliMsg: cliMsg) else{
                                 textView.text = nil
-                                receiver.insertText(msg + "\r\n")
+                                receiver.insertText("[me]:" + msg + "\r\n")
                                 return false
                         }
                         self.toastMessage(title: err.localizedDescription)

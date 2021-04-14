@@ -174,7 +174,7 @@ extension MessageList{
                         switch msg.typ {
                         case .plainTxt:
                                 if msg.isOut{
-                                        str += "--->:"
+                                        str += "[me]:"
                                 }
                                 str += "\(msg.payload!)\r\n"
                         case .contact://TODO::

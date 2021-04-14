@@ -43,7 +43,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="ACB-lj-HKd"/>
                                 </constraints>
-                                <state key="normal" title="Button">
+                                <state key="normal" title="Create">
                                     <color key="titleColor" red="0.97254901959999995" green="0.97639149430000005" blue="0.9797351956" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -355,7 +355,7 @@
             <objects>
                 <viewController storyboardIdentifier="ContactDetailsViewController" id="f4X-jQ-OkL" customClass="ContactDetailsViewController" customModule="ninja_light" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nIm-5o-bGs">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3je-9Q-HmJ">
