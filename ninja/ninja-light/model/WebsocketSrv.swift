@@ -103,6 +103,8 @@ extension WebsocketSrv:IosLibAppCallBackProtocol{
         }
         
         func webSocketClosed() {
-                
+                NotificationCenter.default.post(name:NotifyWebsocketOffline,
+                                                object: self,
+                                                userInfo:nil)
         }
 }

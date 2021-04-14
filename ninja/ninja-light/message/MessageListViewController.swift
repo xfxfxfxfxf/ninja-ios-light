@@ -29,10 +29,20 @@ class MessageListViewController: UIViewController {
                                                        selector:#selector(notifiAction(notification:)),
                                                        name: NotifyMsgSumChanged,
                                                        object: nil)
+                
+                NotificationCenter.default.addObserver(self,
+                                                       selector:#selector(wsOffline(notification:)),
+                                                       name: NotifyWebsocketOffline,
+                                                       object: nil)
         }
         
         deinit {
                 NotificationCenter.default.removeObserver(self)
+        }
+        
+        //MARK: - object c
+        @objc func wsOffline(notification:NSNotification){//TODO::
+//                showErrorTips(err: "offline, please pull to online again" as! Error)
         }
         
         @objc func notifiAction(notification:NSNotification){
@@ -41,10 +51,8 @@ class MessageListViewController: UIViewController {
                         self.tableView.reloadData()
                 }
         }
-        
-        //MARK: - object c
+       
         @objc func reloadChatRoom(_ sender: Any?){
-              //TODO::fetch unread message
                 ServiceDelegate.workQueue.async { [self] in
                         ChatItem.ReloadChatRoom()
                         sortedArray = ChatItem.SortedArra()

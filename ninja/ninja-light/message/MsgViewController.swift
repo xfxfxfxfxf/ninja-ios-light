@@ -28,6 +28,8 @@ class MsgViewController: UIViewController {
                                                        selector:#selector(contactUpdate(notification:)),
                                                        name: NotifyContactChanged,
                                                        object: nil)
+                
+                
                 guard let msges = MessageItem.cache[self.peerUid] else{
                         return
                 }
@@ -45,6 +47,8 @@ class MsgViewController: UIViewController {
                         MessageItem.removeRead(self.peerUid)
                 }
         }
+        
+
         
         @objc func contactUpdate(notification:NSNotification){
                 contactData = ContactItem.cache[peerUid]
