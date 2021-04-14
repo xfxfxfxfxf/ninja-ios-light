@@ -137,10 +137,9 @@ extension CDManager{
                 let managedContext = persistentContainer.viewContext
                 let entity = NSEntityDescription.entity(forEntityName: entity,
                                                in: managedContext)!
-                  
-                let object = NSManagedObject(entity: entity,
-                                             insertInto: managedContext)
                 for mObj in m{
+                        let object = NSManagedObject(entity: entity,
+                                                     insertInto: managedContext)
                         try mObj.fullFillObj(obj: object)
                 }
                 

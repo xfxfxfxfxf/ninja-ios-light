@@ -74,6 +74,9 @@ class ChatItem:NSObject{
                 }
                 
                 try CDManager.shared.AddBatch(entity: "CDChatItem", m: array)
+                for (uid, obj) in msg{
+                        updateLastMsg(peerUid: uid, msg: obj.LastMsg!, time: obj.updateTime, unread: obj.unreadNo)
+                }
                 
                 NotificationCenter.default.post(name:NotifyMsgSumChanged,
                                                 object: self, userInfo:nil)
@@ -110,6 +113,7 @@ class ChatItem:NSObject{
                 let owner = Wallet.shared.Addr!
                 try? CDManager.shared.Delete(entity: "CDChatItem",
                                         predicate: NSPredicate(format: "owner == %@ AND uid == %@", owner, uid))
+                CachedChats.removeValue(forKey: uid)
         }
 }
 

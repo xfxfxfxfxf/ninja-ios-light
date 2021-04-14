@@ -36,7 +36,7 @@ class MessageItem: NSObject {
                 guard let data = result else{
                         return
                 }
-                
+                cache.removeAll()
                 for msg in data{
                         
                         var peerUid:String
@@ -135,6 +135,7 @@ class MessageItem: NSObject {
         
         public static func saveUnread(_ msg:[MessageItem])throws {
                 try CDManager.shared.AddBatch(entity: "CDUnread", m: msg)
+                loadUnread()
         }
 }
 
