@@ -698,7 +698,7 @@
         <scene sceneID="zXh-oJ-LWU">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hMH-iT-oIX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Message" id="5hH-pk-Hw9"/>
+                    <tabBarItem key="tabBarItem" title="Message" image="account" id="5hH-pk-Hw9"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="NPe-PD-yS8">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -735,7 +735,7 @@
         <scene sceneID="5hS-YP-7qe">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3MY-Cq-lPd" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Contact" id="hXe-6p-t0F"/>
+                    <tabBarItem key="tabBarItem" title="Contact" image="account" id="hXe-6p-t0F"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6tS-X7-f1Y">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -754,7 +754,7 @@
         <scene sceneID="Y8B-uS-dJh">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="42j-GZ-Ir9" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Wallet" id="rwf-JU-YKo"/>
+                    <tabBarItem key="tabBarItem" title="Wallet" image="account" id="rwf-JU-YKo"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="svg-Mk-Tzh">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -982,6 +982,7 @@
     <resources>
         <image name="+_icon" width="22" height="22"/>
         <image name="&gt;_icon" width="23" height="22"/>
+        <image name="account" width="30" height="28"/>
         <image name="x_icon" width="22" height="22"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
